@@ -1,0 +1,14 @@
+# emacs temp
+*~
+\#*\#
+
+# bins and deps
+*.o
+*.d
+*.a
+
+**/TAGS
+
+# tests
+
+**/tests/
