@@ -6,7 +6,7 @@
 /*   By: maurodri <maurodri@student.42sp...>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 21:15:46 by maurodri          #+#    #+#             */
-/*   Updated: 2023/10/28 22:01:56 by maurodri         ###   ########.fr       */
+/*   Updated: 2023/10/29 13:38:36 by maurodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,16 +39,28 @@ static void parse_non_format(char **str_ptr)
 {
 	ssize_t	size;
 
-	size = find_ch_or_end_index(*str_ptr, '%') - 1;
-	if (size < 0)
-		return ;
+	size = find_ch_or_end_index(*str_ptr, '%');
 	write(1, *str_ptr, size);
 	*str_ptr = *str_ptr + size;
 }
 
-static void parse_number(char **str_ptr, va_list lst)
+static void parse_number(char **str_ptr, va_list *lst)
 {
+	int		num;
 	
+	num = va_arg(*lst, int);
+	ft_putnbr_fd(num, 1);
+	*str_ptr = *str_ptr + 2; 
+}
+
+static void	parse_string(char **str_ptr, va_list *lst)
+{
+	char	*str;
+	size_t	str_len;
+	
+	str = va_arg(*lst, char *);
+	ft_putstr_fd(str, 1);
+	*str_ptr = *str_ptr + 2;
 }
 
 static int	is_valid_format(char *str)
@@ -61,28 +73,33 @@ static int	is_number_format(char *str)
 	return (str[1] == 'd');
 }
 
-static void parse_format(char **str_ptr, va_list lst)
+static int	is_string_format(char *str)
+{
+	return (str[1] == 's');
+}
+
+static void parse_format(char **str_ptr, va_list *lst)
 {
 	if (is_valid_format(*str_ptr))
 	{
 		if (is_number_format(*str_ptr))
 			parse_number(str_ptr, lst);
+		else if (is_string_format(*str_ptr))
+			parse_string(str_ptr, lst);
 	}
 }
 
 int	ft_printf(const char *str, ...)
 {
-	va_list ptr;
+	va_list args;
  	
-    va_start(ptr, str);
-	
+    va_start(args, str);
+	while (*str)
+	{
+		parse_non_format((char **)&str);
+		parse_format((char **)&str, &args);
+	}
    	
-    int arg1 = va_arg(ptr, int);
-	char *arg2 = va_arg(ptr, char *);
- 	
-    va_end(ptr);
-	printf("arg1:%d\n", arg1);
-	printf("arg2:%s\n", arg2);
- 
+    va_end(args); 
     return (0);
 }
