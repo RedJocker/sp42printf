@@ -6,7 +6,7 @@
 /*   By: maurodri <maurodri@student.42sp...>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 21:15:46 by maurodri          #+#    #+#             */
-/*   Updated: 2023/10/30 00:23:03 by maurodri         ###   ########.fr       */
+/*   Updated: 2023/10/30 17:02:40 by maurodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ static int	parse_escape(char **str_ptr, va_list *lst)
 {
 	char	ch;
 
+	(void) lst;
 	ch = '%';
 	ft_putchar_fd(ch, 1);
 	*str_ptr = *str_ptr + 2;
