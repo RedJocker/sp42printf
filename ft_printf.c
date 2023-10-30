@@ -6,7 +6,7 @@
 /*   By: maurodri <maurodri@student.42sp...>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 21:15:46 by maurodri          #+#    #+#             */
-/*   Updated: 2023/10/30 17:02:40 by maurodri         ###   ########.fr       */
+/*   Updated: 2023/10/30 17:44:04 by maurodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <stdio.h>
 #include "libft/libft.h"
 
-#define ARGS "==%d%s%c%i%%==\n", -200, "HELLO", '?', 19
+#define ARGS "==%d%s%c%i%%%u==\n", -200, "HELLO", '?', 19, -1
 
 int	ft_printf(const char *str, ...);
 
@@ -30,6 +30,23 @@ int	main(void)
 	printf("ret %i\n", ret);
 	return (0);
 }
+
+static void	ft_putunbr_fd(unsigned int num, int fd)
+{
+	char	digit;
+
+	if (num < 10)
+	{
+		digit = '0' + (char) num;
+		write(fd, &digit, 1);
+	}
+	else
+	{
+		ft_putunbr_fd(num / 10, fd);
+		ft_putunbr_fd(num % 10, fd);
+	}
+}
+
 
 static int	find_ch_or_end_index(char *str, char ch)
 {
@@ -74,7 +91,7 @@ static int	parse_char(char **str_ptr, va_list *lst)
 	return (1);
 }
 
-static int	parse_number(char **str_ptr, va_list *lst)
+static int	parse_base10(char **str_ptr, va_list *lst)
 {
 	int		num;
 	int		size;
@@ -86,6 +103,24 @@ static int	parse_number(char **str_ptr, va_list *lst)
 		size = 1;
 	else
 		size = 0;
+	while (num != 0)
+	{
+		size++;
+		num /= 10;
+	}
+	return (size);
+}
+
+static int	parse_ubase10(char **str_ptr, va_list *lst)
+{
+	unsigned int	num;
+	int				size;
+	
+	num = va_arg(*lst, unsigned int);
+	ft_putunbr_fd(num, 1);
+	*str_ptr = *str_ptr + 2;
+	
+	size = 0;
 	while (num != 0)
 	{
 		size++;
@@ -126,6 +161,11 @@ static int	is_base10_format(char *str)
 	return (str[1] == 'd' || str[1] == 'i');
 }
 
+static int	is_ubase10_format(char *str)
+{
+	return (str[1] == 'u');
+}
+
 static int	is_string_format(char *str)
 {
 	return (str[1] == 's');
@@ -139,13 +179,15 @@ static int	parse_format(char **str_ptr, va_list *lst)
 	if (is_valid_format(*str_ptr))
 	{
 		if (is_base10_format(*str_ptr))
-			len = parse_number(str_ptr, lst);
+			len = parse_base10(str_ptr, lst);
 		else if (is_string_format(*str_ptr))
 			len = parse_string(str_ptr, lst);
 		else if (is_char_format(*str_ptr))
 			len = parse_char(str_ptr, lst);
 		else if (is_escape_format(*str_ptr))
 			len = parse_escape(str_ptr, lst);
+		else if (is_ubase10_format(*str_ptr))
+			len = parse_ubase10(str_ptr, lst);
 	}
 	return (len);
 }
