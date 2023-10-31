@@ -1,27 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstclear_bonus.c                                :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: maurodri <maurodri@student.42sp...>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/24 15:02:59 by maurodri          #+#    #+#             */
-/*   Updated: 2023/10/24 15:03:01 by maurodri         ###   ########.fr       */
+/*   Created: 2023/10/30 18:42:55 by maurodri          #+#    #+#             */
+/*   Updated: 2023/10/30 19:19:23 by maurodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <stdio.h>
+#include "ft_printf.h"
 
-void	ft_lstclear(t_list **lst, void (*del_content)(void*))
+#define ARGS "==%d%s%c%i%%%u==\n", -200, "HELLO", '?', 19, -1
+
+int	main(void)
 {
-	t_list	*ptr;
+	int	ret;
 
-	if (!lst)
-		return ;
-	while (*lst)
-	{
-		ptr = (*lst)->next;
-		ft_lstdelone(*lst, del_content);
-		*lst = ptr;
-	}
+	printf("\nft_printf:\n");
+	ret = ft_printf(ARGS);
+	printf("ret %i\n", ret);
+	printf("\nprintf:\n");
+	ret = printf(ARGS);
+	printf("ret %i\n", ret);
+	return (0);
 }

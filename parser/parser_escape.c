@@ -1,27 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_striteri.c                                      :+:      :+:    :+:   */
+/*   parser_escape.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maurodri <maurodri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maurodri <maurodri@student.42sp...>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/19 13:33:14 by maurodri          #+#    #+#             */
-/*   Updated: 2023/10/19 13:48:51 by maurodri         ###   ########.fr       */
+/*   Created: 2023/10/30 19:17:07 by maurodri          #+#    #+#             */
+/*   Updated: 2023/10/30 19:21:43 by maurodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h" 
+#include "parser.h"
+#include "parser_utils.h"
 
-void	ft_striteri(char *str, void (*fun)(unsigned int, char*))
+int	parse_escape(char **str_ptr, va_list *lst)
 {
-	size_t	i;
+	char	ch;
 
-	if (!str)
-		return ;
-	i = 0;
-	while (str[i])
-	{
-		fun(i, str + i);
-		i++;
-	}
+	(void) lst;
+	ch = '%';
+	write(1, &ch, 1);
+	*str_ptr = *str_ptr + 2;
+	return (1);
+}
+
+int	is_escape_format(char *str)
+{
+	return (str[1] == '%');
 }

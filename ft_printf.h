@@ -1,31 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strrchr.c                                       :+:      :+:    :+:   */
+/*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maurodri <maurodri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: maurodri <maurodri@student.42sp...>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/15 21:05:34 by maurodri          #+#    #+#             */
-/*   Updated: 2023/10/15 21:22:38 by maurodri         ###   ########.fr       */
+/*   Created: 2023/10/30 18:24:08 by maurodri          #+#    #+#             */
+/*   Updated: 2023/10/30 18:45:41 by maurodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-char	*ft_strrchr(const char *str, int ch)
-{
-	char	*ptr;
-	char	c;
+#ifndef FT_PRINTF_H
+# define FT_PRINTF_H
 
-	c = (char) ch;
-	ptr = (char *) str;
-	while (*ptr)
-		ptr++;
-	if (c == '\0')
-		return (ptr);
-	while (ptr >= str)
-	{
-		if (*ptr == c)
-			return (ptr);
-		ptr--;
-	}
-	return (0);
-}
+int	ft_printf(const char *str, ...);
+
+#endif

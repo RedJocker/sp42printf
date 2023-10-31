@@ -1,22 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstdelone_bonus.c                               :+:      :+:    :+:   */
+/*   parser_utils.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: maurodri <maurodri@student.42sp...>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/24 15:03:12 by maurodri          #+#    #+#             */
-/*   Updated: 2023/10/24 15:03:14 by maurodri         ###   ########.fr       */
+/*   Created: 2023/10/30 18:52:14 by maurodri          #+#    #+#             */
+/*   Updated: 2023/10/30 19:06:48 by maurodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef PARSER_UTILS_H
+# define PARSER_UTILS_H
 
-void	ft_lstdelone(t_list *node, void (*del_content)(void*))
-{
-	if (!node || !del_content)
-		return ;
-	if (node->content)
-		del_content(node->content);
-	free(node);
-}
+# include <unistd.h>
+# include <stdlib.h>
+
+// parser_utils.c
+int		find_ch_or_end_index(char *str, char ch);
+int		ft_putunbr_fd(unsigned int num, int fd);
+void	ft_putnbr_fd(int n, int fd);
+size_t	ft_strlen(const char *str);
+//
+
+#endif

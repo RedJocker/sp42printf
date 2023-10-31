@@ -1,22 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstlast_bonus.c                                 :+:      :+:    :+:   */
+/*   parser_ubase10.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: maurodri <maurodri@student.42sp...>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/24 15:03:43 by maurodri          #+#    #+#             */
-/*   Updated: 2023/10/24 15:03:43 by maurodri         ###   ########.fr       */
+/*   Created: 2023/10/30 19:34:11 by maurodri          #+#    #+#             */
+/*   Updated: 2023/10/30 19:35:26 by maurodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "parser.h"
+#include "parser_utils.h"
 
-t_list	*ft_lstlast(t_list *lst)
+int	is_ubase10_format(char *str)
 {
-	if (!lst)
-		return (NULL);
-	while (lst->next)
-		lst = lst->next;
-	return (lst);
+	return (str[1] == 'u');
+}
+
+int	parse_ubase10(char **str_ptr, va_list *lst)
+{
+	unsigned int	num;
+	int				size;
+
+	num = va_arg(*lst, unsigned int);
+	ft_putunbr_fd(num, 1);
+	*str_ptr = *str_ptr + 2;
+	size = 0;
+	while (num != 0)
+	{
+		size++;
+		num /= 10;
+	}
+	return (size);
 }

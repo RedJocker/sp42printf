@@ -1,26 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_back_bonus.c                             :+:      :+:    :+:   */
+/*   parser_string.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: maurodri <maurodri@student.42sp...>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/24 15:02:25 by maurodri          #+#    #+#             */
-/*   Updated: 2023/10/24 15:14:08 by maurodri         ###   ########.fr       */
+/*   Created: 2023/10/30 19:31:53 by maurodri          #+#    #+#             */
+/*   Updated: 2023/10/30 19:33:11 by maurodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "parser.h"
+#include "parser_utils.h"
 
-void	ft_lstadd_back(t_list **lst, t_list *new_node)
+int	is_string_format(char *str)
 {
-	t_list	*last_node;
+	return (str[1] == 's');
+}
 
-	if (!lst)
-		return ;
-	last_node = ft_lstlast(*lst);
-	if (!last_node)
-		*lst = new_node;
-	else
-		last_node->next = new_node;
+int	parse_string(char **str_ptr, va_list *lst)
+{
+	char	*str;
+	int		str_len;
+
+	str = va_arg(*lst, char *);
+	str_len = (int) ft_strlen(str);
+	write(1, str, str_len);
+	*str_ptr = *str_ptr + 2;
+	return (str_len);
 }

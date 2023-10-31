@@ -6,7 +6,7 @@
 #    By: maurodri <maurodri@student.42sp...>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/28 21:13:25 by maurodri          #+#    #+#              #
-#    Updated: 2023/10/30 17:25:50 by maurodri         ###   ########.fr        #
+#    Updated: 2023/10/30 18:23:25 by maurodri         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -24,9 +24,6 @@ CC = cc
 
 all: $(NAME)
 
-run: $(NAME) libft.a
-	$(CC) ft_printf.c libft.a
-
 $(NAME): $(OBJS)
 	ar rcs $(NAME) $^
 
@@ -42,7 +39,6 @@ $(OBJS) : %.o : %.c
 .Phony: all clean fclean re 
 
 clean:
-	echo "clean1"
 	rm -fr $(OBJS) $(DEP_FILES) $(BONUS_OBJS) $(BONUS_DEP_FILES)
 
 fclean: clean
@@ -51,4 +47,3 @@ fclean: clean
 re: fclean all
 
 -include $(DEP_FILES)
--include ./libft/Makefile
