@@ -6,7 +6,7 @@
 /*   By: maurodri <maurodri@student.42sp...>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 18:27:52 by maurodri          #+#    #+#             */
-/*   Updated: 2023/10/30 21:22:54 by maurodri         ###   ########.fr       */
+/*   Updated: 2023/11/01 17:08:22 by maurodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ int	parse_format(char **str_ptr, va_list *lst)
 			len = parse_escape(str_ptr, lst);
 		else if (is_ubase10_format(*str_ptr))
 			len = parse_ubase10(str_ptr, lst);
+		else
+			len = -1;
 	}
 	return (len);
 }

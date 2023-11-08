@@ -6,10 +6,11 @@
 /*   By: maurodri <maurodri@student.42sp...>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 21:29:27 by maurodri          #+#    #+#             */
-/*   Updated: 2023/10/30 21:44:36 by maurodri         ###   ########.fr       */
+/*   Updated: 2023/11/01 17:01:55 by maurodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "parser_utils.h"
 
 void	ft_putnbr_helper(long long nb, char *base, unsigned int base_size)
 {
@@ -27,39 +28,16 @@ void	ft_putnbr_helper(long long nb, char *base, unsigned int base_size)
 	}
 }
 
-void	init_arr(char *arr, unsigned int size)
+void	ft_putnbr_hex(int nbr, char *hexbase)
 {
-	unsigned int	i;
-
-	i = 0;
-	while (i < size)
-	{
-		arr[i] = 0;
-		i++;
-	}
-}
-
-void	ft_putnbr_hex(int nbr, int upper, char *base)
-{
-	char	*p;
 	
-	
-	p = base;
-	base_len = 0;
-	while (*p != '\0')
-	{
-		base_len++;
-		p++;
-	}
-	if (!is_valid_base(base, base_len))
-		return ;
 	if (nbr < 0)
 	{
 		write(1, "-", 1);
-		ft_putnbr_helper(-(long long) nbr, base, base_len);
+		ft_putnbr_helper(-(long long) nbr, hexbase, 16);
 	}
 	else if (nbr == 0)
 		write(1, "0", 1);
 	else
-		ft_putnbr_helper((long long) nbr, base, base_len);
+		ft_putnbr_helper((long long) nbr, hexbase, 16);
 }
