@@ -6,7 +6,7 @@
 #    By: maurodri <maurodri@student.42sp...>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/28 21:13:25 by maurodri          #+#    #+#              #
-#    Updated: 2023/11/01 16:58:31 by maurodri         ###   ########.fr        #
+#    Updated: 2023/11/08 21:35:46 by maurodri         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -19,7 +19,9 @@ PARSER_FILES =	parser.c \
 			parser_string.c \
 			parser_ubase10.c \
 			parser_utils.c \
-			parser_utils2.c 
+			parser_utils2.c \
+			parser_format_args.c \
+
 #BONUS_FILES =
 VPATH = ./parser/ 
 DEP_FILES = $(patsubst %.c,%.d,$(FILES))

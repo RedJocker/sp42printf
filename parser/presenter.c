@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   presenter.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: maurodri <maurodri@student.42sp...>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/30 18:24:08 by maurodri          #+#    #+#             */
-/*   Updated: 2023/11/08 19:52:53 by maurodri         ###   ########.fr       */
+/*   Created: 2023/11/08 21:54:06 by maurodri          #+#    #+#             */
+/*   Updated: 2023/11/08 21:57:53 by maurodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#include "parser.h"
 
-int	ft_printf(const char *str, ...);
-
-#endif
+int	present_format(t_format *format, va_list *lst)
+{
+	
+}
