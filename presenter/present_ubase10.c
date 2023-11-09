@@ -1,31 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser_ubase10.c                                   :+:      :+:    :+:   */
+/*   present_ubase10.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maurodri <maurodri@student.42sp...>        +#+  +:+       +#+        */
+/*   By: maurodri <maurodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/30 19:34:11 by maurodri          #+#    #+#             */
-/*   Updated: 2023/10/30 19:35:26 by maurodri         ###   ########.fr       */
+/*   Created: 2023/11/09 00:49:23 by maurodri          #+#    #+#             */
+/*   Updated: 2023/11/09 00:55:11 by maurodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
-#include "parser_utils.h"
+#include "presenter_utils.h"
+#include "presenter.h"
 
-int	is_ubase10_format(char *str)
-{
-	return (str[1] == 'u');
-}
-
-int	parse_ubase10(char **str_ptr, va_list *lst)
+int	present_ubase10(va_list *lst)
 {
 	unsigned int	num;
 	int				size;
 
 	num = va_arg(*lst, unsigned int);
 	ft_putunbr_fd(num, 1);
-	*str_ptr = *str_ptr + 2;
 	size = 0;
 	while (num != 0)
 	{

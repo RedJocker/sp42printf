@@ -6,7 +6,7 @@
 /*   By: maurodri <maurodri@student.42sp...>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 18:42:55 by maurodri          #+#    #+#             */
-/*   Updated: 2023/10/30 19:19:23 by maurodri         ###   ########.fr       */
+/*   Updated: 2023/11/08 23:48:33 by maurodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,12 @@
 #include "ft_printf.h"
 
 #define ARGS "==%d%s%c%i%%%u==\n", -200, "HELLO", '?', 19, -1
+//#define ARGS "==%s==\n", "HELLO"
+//#define ARGS "==%d==\n", -200
+//#define ARGS "==%i==\n", 12345
+//#define ARGS "==%u==\n", -1
+//#define ARGS "==%%==\n"
+//#define ARGS "==%c==\n", '?'
 
 int	main(void)
 {

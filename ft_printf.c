@@ -6,7 +6,7 @@
 /*   By: maurodri <maurodri@student.42sp...>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 21:15:46 by maurodri          #+#    #+#             */
-/*   Updated: 2023/11/01 17:10:26 by maurodri         ###   ########.fr       */
+/*   Updated: 2023/11/08 23:59:17 by maurodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,16 @@ int	ft_printf(const char *str, ...)
 	int		len;
 	int		ret;
 
+	if (!str)
+		return (-1);
 	va_start(args, str);
 	len = 0;
 	ret = 0;
 	while (*str)
 	{
 		len += parse_non_format((char **)&str);
+		if (!*str)
+			return (len);
 		ret = parse_format((char **)&str, &args);
 		if (ret < 0)
 			return (ret);

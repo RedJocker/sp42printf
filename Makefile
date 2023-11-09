@@ -6,24 +6,26 @@
 #    By: maurodri <maurodri@student.42sp...>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/28 21:13:25 by maurodri          #+#    #+#              #
-#    Updated: 2023/11/08 21:35:46 by maurodri         ###   ########.fr        #
+#    Updated: 2023/11/09 00:48:38 by maurodri         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
 NAME = libftprintf.a
-FILES = ft_printf.c
-PARSER_FILES =	parser.c \
-			parser_base10.c \
-			parser_char.c \
-			parser_escape.c \
-			parser_string.c \
-			parser_ubase10.c \
-			parser_utils.c \
-			parser_utils2.c \
-			parser_format_args.c \
+FILES = ft_printf.c \
+		parser.c \
+		parser_utils.c \
+		parser_format_args.c \
+		presenter.c \
+		presenter_utils.c \
+		presenter_utils2.c \
+		present_string.c \
+		present_base10.c \
+		present_ubase10.c \
+		present_char.c \
+		present_escape.c \
 
 #BONUS_FILES =
-VPATH = ./parser/ 
+VPATH = ./parser/ ./presenter/
 DEP_FILES = $(patsubst %.c,%.d,$(FILES))
 OBJS = $(patsubst %.c,%.o,$(FILES))
 PARSER_DEP_FILES = $(patsubst %.c,%.d,$(PARSER_FILES))

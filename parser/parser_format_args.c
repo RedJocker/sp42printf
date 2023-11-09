@@ -1,21 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_format_args.c                                :+:      :+:    :+:   */
+/*   parser_format_args.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maurodri <maurodri@student.42sp...>        +#+  +:+       +#+        */
+/*   By: maurodri <maurodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/08 21:20:29 by maurodri          #+#    #+#             */
-
+/*   Created: 2023/11/08 23:58:38 by maurodri          #+#    #+#             */
+/*   Updated: 2023/11/09 00:24:34 by maurodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
-#include "parser_utils.h"
 
 int	parse_initial(t_format *format, char **str_ptr)
 {
-	if(**str_ptr != '%')
+	if (**str_ptr != '%')
 	{
 		format->conversion = INVALID;
 		return (0);
@@ -51,7 +50,6 @@ int	parse_precision(t_format *format, char **str_ptr)
 int	parse_convertion(t_format *format, char **str_ptr)
 {
 	format->conversion = INVALID;
-	
 	if (**str_ptr == 's')
 		format->conversion = STRING;
 	else if (**str_ptr == 'i' || **str_ptr == 'd')
@@ -61,7 +59,7 @@ int	parse_convertion(t_format *format, char **str_ptr)
 	else if (**str_ptr == 'c')
 		format->conversion = CHAR;
 	else if (**str_ptr == '%')
-		format->conversion = CHAR;
+		format->conversion = ESCAPE;
 	if (format->conversion == INVALID)
 		return (0);
 	else

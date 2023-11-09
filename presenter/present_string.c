@@ -1,24 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser_string.c                                    :+:      :+:    :+:   */
+/*   present_string.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maurodri <maurodri@student.42sp...>        +#+  +:+       +#+        */
+/*   By: maurodri <maurodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/30 19:31:53 by maurodri          #+#    #+#             */
-/*   Updated: 2023/10/30 19:33:11 by maurodri         ###   ########.fr       */
+/*   Created: 2023/11/09 00:43:42 by maurodri          #+#    #+#             */
+/*   Updated: 2023/11/09 00:55:44 by maurodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
-#include "parser_utils.h"
+#include "presenter_utils.h"
+#include "presenter.h"
 
-int	is_string_format(char *str)
-{
-	return (str[1] == 's');
-}
-
-int	parse_string(char **str_ptr, va_list *lst)
+int	present_string(va_list *lst)
 {
 	char	*str;
 	int		str_len;
@@ -26,6 +21,5 @@ int	parse_string(char **str_ptr, va_list *lst)
 	str = va_arg(*lst, char *);
 	str_len = (int) ft_strlen(str);
 	write(1, str, str_len);
-	*str_ptr = *str_ptr + 2;
 	return (str_len);
 }
