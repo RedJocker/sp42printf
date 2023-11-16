@@ -6,7 +6,7 @@
 /*   By: maurodri <maurodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 00:25:25 by maurodri          #+#    #+#             */
-/*   Updated: 2023/11/09 00:37:10 by maurodri         ###   ########.fr       */
+/*   Updated: 2023/11/16 15:38:15 by maurodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ int	ft_putunbr_fd(unsigned int num, int fd)
 	}
 	return (size);
 }
-
 
 size_t	ft_strlen(const char *str)
 {

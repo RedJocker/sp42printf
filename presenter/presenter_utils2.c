@@ -6,37 +6,29 @@
 /*   By: maurodri <maurodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 00:33:49 by maurodri          #+#    #+#             */
-/*   Updated: 2023/11/09 00:37:10 by maurodri         ###   ########.fr       */
+/*   Updated: 2023/11/16 15:39:11 by maurodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "presenter_utils.h"
 
-static void	hex_helper(long long nb, char *base, unsigned int base_size)
+int	ft_putnbr_hex(unsigned long nbr, char *hexbase)
 {
 	char	digit;
+	int		size;
 
-	if (nb >= base_size)
+	if (nbr == 0)
+		return (write(1, "0", 1));
+	size = 0;
+	if (nbr >= 16)
 	{
-		hex_helper(nb / base_size, base, base_size); 
-		hex_helper(nb % base_size, base, base_size);
+		size += ft_putnbr_hex(nbr / 16, hexbase); 
+		size += ft_putnbr_hex(nbr % 16, hexbase);
 	}
 	else
 	{
-		digit = base[nb];
-		write(1, &digit, 1);
+		digit = hexbase[nbr];
+		size += write(1, &digit, 1);
 	}
-}
-
-void	ft_putnbr_hex(int nbr, char *hexbase)
-{
-	if (nbr < 0)
-	{
-		write(1, "-", 1);
-		hex_helper(-(long long) nbr, hexbase, 16);
-	}
-	else if (nbr == 0)
-		write(1, "0", 1);
-	else
-		hex_helper((long long) nbr, hexbase, 16);
+	return (size);
 }

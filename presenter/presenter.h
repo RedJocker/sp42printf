@@ -6,7 +6,7 @@
 /*   By: maurodri <maurodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 00:06:04 by maurodri          #+#    #+#             */
-/*   Updated: 2023/11/09 00:56:15 by maurodri         ###   ########.fr       */
+/*   Updated: 2023/11/16 15:08:52 by maurodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,4 +22,7 @@ int	present_base10(va_list *lst);
 int	present_ubase10(va_list *lst);
 int	present_char(va_list *lst);
 int	present_escape(va_list *lst);
+int	present_hexa_lower(va_list *lst);
+int	present_hexa_upper(va_list *lst);
+int	present_pointer(va_list *lst);
 #endif

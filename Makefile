@@ -6,7 +6,7 @@
 #    By: maurodri <maurodri@student.42sp...>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/28 21:13:25 by maurodri          #+#    #+#              #
-#    Updated: 2023/11/09 00:48:38 by maurodri         ###   ########.fr        #
+#    Updated: 2023/11/16 15:34:36 by maurodri         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -23,13 +23,20 @@ FILES = ft_printf.c \
 		present_ubase10.c \
 		present_char.c \
 		present_escape.c \
+		present_hexa_lower.c \
+		present_hexa_upper.c \
+		present_pointer.c 
+HEADERS = ft_printf.h \
+		ft_printf_internals.h \
+		parser/parser.h \
+		parser/parser_utils.h \
+		presenter/presenter.h \
+		presenter/presenter_utils.h
 
 #BONUS_FILES =
 VPATH = ./parser/ ./presenter/
 DEP_FILES = $(patsubst %.c,%.d,$(FILES))
 OBJS = $(patsubst %.c,%.o,$(FILES))
-PARSER_DEP_FILES = $(patsubst %.c,%.d,$(PARSER_FILES))
-PARSER_OBJS = $(patsubst %.c,%.o,$(PARSER_FILES))
 #BONUS_DEP_FILES = $(patsubst %.c,%.d,$(BONUS_FILES))
 #BONUS_OBJS = $(patsubst %.c,%.o,$(BONUS_FILES))
 DEP_FLAGS =  -MP -MD
@@ -39,11 +46,12 @@ CC = cc
 
 all: $(NAME)
 
-$(NAME): $(OBJS) $(PARSER_OBJS)
+$(NAME): $(OBJS)
 	ar rcs $(NAME) $^
+	etags $(wildcard *.c) $(wildcard */*.c) $(HEADERS) 
 
-$(OBJS) $(PARSER_OBJS): %.o : %.c
-	$(CC) $(CFLAGS) -c $< -o ./$@ $(DEP_FLAGS)
+$(OBJS): %.o : %.c
+	$(CC) $(CFLAGS) -c $< -o $@ $(DEP_FLAGS)
 
 #$(BONUS_OBJS) : %.o : %.c
 #	$(CC) $(CFLAGS) -c $< -o ./$@ $(DEP_FLAGS)
@@ -53,13 +61,17 @@ $(OBJS) $(PARSER_OBJS): %.o : %.c
 
 .Phony: all clean fclean re 
 
+test: $(NAME)
+	$(CC) $(CFLAGS) -g main.c $<
+	./a.out
+
 clean:
 	rm -fr $(OBJS) $(DEP_FILES) \
 			$(BONUS_OBJS) $(BONUS_DEP_FILES) \
-			$(PARSER_OBJS) $(PARSER_DEP_FILES)
+			*~
 
 fclean: clean
-	rm -f $(NAME)
+	rm -f $(NAME) TAGS ./a.out
 
 re: fclean all
 

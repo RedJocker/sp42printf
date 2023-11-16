@@ -6,7 +6,7 @@
 /*   By: maurodri <maurodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 00:10:50 by maurodri          #+#    #+#             */
-/*   Updated: 2023/11/09 00:18:36 by maurodri         ###   ########.fr       */
+/*   Updated: 2023/11/16 14:53:25 by maurodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,9 @@ typedef enum e_conversion
 	UBASE_10,
 	CHAR,
 	ESCAPE,
+	HEXA_LOWER,
+	HEXA_UPPER,
+	POINTER
 }	t_conversion;
 
 // %[flags][width][.precision]conversion

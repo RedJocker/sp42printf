@@ -1,32 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   present_ubase10.c                                  :+:      :+:    :+:   */
+/*   present_hexa_lower.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: maurodri <maurodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/09 00:49:23 by maurodri          #+#    #+#             */
-/*   Updated: 2023/11/16 14:50:58 by maurodri         ###   ########.fr       */
+/*   Created: 2023/11/16 13:01:46 by maurodri          #+#    #+#             */
+/*   Updated: 2023/11/16 15:35:41 by maurodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "presenter_utils.h"
 #include "presenter.h"
 
-int	present_ubase10(va_list *lst)
+int	present_hexa_lower(va_list *lst)
 {
 	unsigned int	num;
-	int				size;
 
 	num = va_arg(*lst, unsigned int);
-	ft_putunbr_fd(num, 1);
-	if (num == 0)
-		return (1);
-	size = 0;
-	while (num != 0)
-	{
-		size++;
-		num /= 10;
-	}
-	return (size);
+	return (ft_putnbr_hex(num, "0123456789abcdef"));
 }

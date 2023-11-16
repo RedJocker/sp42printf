@@ -6,7 +6,7 @@
 /*   By: maurodri <maurodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 23:58:38 by maurodri          #+#    #+#             */
-/*   Updated: 2023/11/09 00:24:34 by maurodri         ###   ########.fr       */
+/*   Updated: 2023/11/16 15:01:01 by maurodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,12 @@ int	parse_convertion(t_format *format, char **str_ptr)
 		format->conversion = CHAR;
 	else if (**str_ptr == '%')
 		format->conversion = ESCAPE;
+	else if (**str_ptr == 'x')
+		format->conversion = HEXA_LOWER;
+	else if (**str_ptr == 'X')
+		format->conversion = HEXA_UPPER;
+	else if (**str_ptr == 'p')
+		format->conversion = POINTER;
 	if (format->conversion == INVALID)
 		return (0);
 	else
