@@ -6,7 +6,7 @@
 #    By: maurodri <maurodri@student.42sp...>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/28 21:13:25 by maurodri          #+#    #+#              #
-#    Updated: 2023/11/16 15:34:36 by maurodri         ###   ########.fr        #
+#    Updated: 2023/11/17 20:34:16 by maurodri         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -40,13 +40,14 @@ OBJS = $(patsubst %.c,%.o,$(FILES))
 #BONUS_DEP_FILES = $(patsubst %.c,%.d,$(BONUS_FILES))
 #BONUS_OBJS = $(patsubst %.c,%.o,$(BONUS_FILES))
 DEP_FLAGS =  -MP -MD
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -g -Wall -Wextra -Werror
 CC = cc
 
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
+	rm -f $(NAME)
 	ar rcs $(NAME) $^
 	etags $(wildcard *.c) $(wildcard */*.c) $(HEADERS) 
 

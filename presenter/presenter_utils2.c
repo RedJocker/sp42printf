@@ -6,13 +6,13 @@
 /*   By: maurodri <maurodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 00:33:49 by maurodri          #+#    #+#             */
-/*   Updated: 2023/11/16 15:39:11 by maurodri         ###   ########.fr       */
+/*   Updated: 2023/11/17 18:46:12 by maurodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "presenter_utils.h"
 
-int	ft_putnbr_hex(unsigned long nbr, char *hexbase)
+int	ft_putnbr_hex(unsigned long long nbr, char *hexbase)
 {
 	char	digit;
 	int		size;
