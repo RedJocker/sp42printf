@@ -6,14 +6,13 @@
 /*   By: maurodri <maurodri@student.42sp...>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 16:02:50 by maurodri          #+#    #+#             */
-/*   Updated: 2023/12/04 13:18:27 by maurodri         ###   ########.fr       */
+/*   Updated: 2023/12/04 15:35:59 by maurodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "presenter_utils_bonus.h"
 #include "presenter_bonus.h"
 #include <stdlib.h>
-#include <stdio.h> // TODO remove
 
 int	present_char(t_format *format, va_list *lst)
 {
@@ -21,16 +20,18 @@ int	present_char(t_format *format, va_list *lst)
 	char	*str;
 	size_t	size;
 
-	size = (format->width > 0 && format->width) || 1;
-	printf("size: %zu\n", size);
+	size = (format->width > 0) * format->width + (format->width <= 0) * 1;
 	str = malloc(size * sizeof(char));
-	ch = (char) va_arg(*lst, int);
+	ch = ' ';
 	if (!str)
 		return -1;
-	if ((format->flags && LEFT_JUSTIFY) == LEFT_JUSTIFY)
-		str[size - 1] = ch;
-	else
+	fill_string(str, ch, size);
+	ch = (char) va_arg(*lst, int);
+	if ((format->flags & LEFT_JUSTIFY) == LEFT_JUSTIFY)		
 		str[0] = ch;
+	else
+		str[size - 1] = ch;
 	write(1, str, size);
-	return (1);
+	free(str);
+	return (size);
 }

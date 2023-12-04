@@ -6,11 +6,12 @@
 /*   By: maurodri <maurodri@student.42sp...>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 16:10:15 by maurodri          #+#    #+#             */
-/*   Updated: 2023/12/04 12:35:07 by maurodri         ###   ########.fr       */
+/*   Updated: 2023/12/04 13:38:48 by maurodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser_bonus.h"
+#include "parser_utils_bonus.h"
 
 int	parse_initial(t_format *format, char **str_ptr)
 {
@@ -52,15 +53,17 @@ int	parse_flags(t_format *format, char **str_ptr)
 
 int	parse_width(t_format *format, char **str_ptr)
 {
-	(void) format;
-	(void) str_ptr;
+	format->width = parse_number(str_ptr);
 	return (1);
 }
 
 int	parse_precision(t_format *format, char **str_ptr)
 {
-	(void) format;
-	(void) str_ptr;
+	if (**str_ptr == '.')
+	{
+		(*str_ptr)++;
+		format->precision = parse_number(str_ptr);
+	}
 	return (1);
 }
 

@@ -6,7 +6,7 @@
 /*   By: maurodri <maurodri@student.42sp...>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 18:42:55 by maurodri          #+#    #+#             */
-/*   Updated: 2023/12/04 13:15:00 by maurodri         ###   ########.fr       */
+/*   Updated: 2023/12/04 19:55:47 by maurodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,17 +23,19 @@
 //#define ARGS "==%x==\n", 253
 //#define ARGS "==%X==\n", 1244
 //#define ARGS "==%p==\n", (void *) LONG_MIN
-#define ARGS "==%-c==\n", 'p'
+//#define ARGS "==%010c==\n", 'x'
+//#define ARGS " %-11p %-12p ", INT_MIN, INT_MAX
+#define ARGS "==%10p==", &ret
 
 int	main(void)
 {
 	int	ret;
 
-	printf("\nft_printf:\n");
-	ret = ft_printf(ARGS);
-	printf("ret %i\n", ret);
 	printf("\nprintf:\n");
 	ret = printf(ARGS);
-	printf("ret %i\n", ret);
+	printf("\nret %i\n", ret);
+	printf("\nft_printf:\n");
+	ret = ft_printf(ARGS);
+	printf("\nret %i\n", ret);
 	return (0);
 }

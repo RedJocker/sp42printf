@@ -6,7 +6,7 @@
 /*   By: maurodri <maurodri@student.42sp...>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 16:10:50 by maurodri          #+#    #+#             */
-/*   Updated: 2023/11/27 16:10:52 by maurodri         ###   ########.fr       */
+/*   Updated: 2023/12/04 16:05:33 by maurodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	ft_printf(const char *str, ...)
 	va_list	args;
 	int		len;
 	int		ret;
-
+		
 	if (!str)
 		return (-1);
 	va_start(args, str);

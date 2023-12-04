@@ -6,7 +6,7 @@
 /*   By: maurodri <maurodri@student.42sp...>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 16:10:16 by maurodri          #+#    #+#             */
-/*   Updated: 2023/11/27 16:10:16 by maurodri         ###   ########.fr       */
+/*   Updated: 2023/12/04 14:01:19 by maurodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,4 +22,17 @@ int	find_ch_or_end_index(char *str, char ch)
 		i++;
 	}
 	return (i);
+}
+
+int	parse_number(char **str)
+{
+	int	num;
+
+	num = 0;
+	while (**str >= '0' && **str <= '9')
+	{
+		num = (num * 10) + (**str - '0');
+		(*str)++;
+	}
+	return (num);
 }
