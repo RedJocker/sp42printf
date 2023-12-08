@@ -6,7 +6,7 @@
 #    By: maurodri <maurodri@student.42sp...>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/28 21:13:25 by maurodri          #+#    #+#              #
-#    Updated: 2023/12/04 18:27:36 by maurodri         ###   ########.fr        #
+#    Updated: 2023/12/07 19:58:27 by maurodri         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -74,32 +74,32 @@ endif
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	echo "NAME $(WITH_BONUS)"
-	@echo "CLEAR $(CLEAR)"
-	@echo "OBJS $(OBJS)"
-	rm -f $(NAME) $(CLEAR)
-	ar rcs $(NAME) $^
-	etags $(wildcard *.c) $(wildcard */*.c) $(HEADERS) 
+#	echo "NAME $(WITH_BONUS)"
+#	@echo "CLEAR $(CLEAR)"
+#	@echo "OBJS $(OBJS)"
+	@rm -f $(NAME) $(CLEAR)
+	@ar rcs $(NAME) $^
+	@etags $(wildcard *.c) $(wildcard */*.c) $(HEADERS) 
 
 $(OBJS): %.o : %.c
-	$(CC) $(CFLAGS) -c $< -o $@ $(DEP_FLAGS)
+	@$(CC) $(CFLAGS) -c $< -o $@ $(DEP_FLAGS)
 
 bonus:
-	$(MAKE) WITH_BONUS=1
+	@$(MAKE) WITH_BONUS=1
 
 .Phony: all clean fclean re 
 
 test: $(NAME)
-	$(CC) $(CFLAGS) -g main.c $<
-	./a.out
+	@$(CC) $(CFLAGS) -g main.c $<
+	@./a.out
 
 clean:
-	rm -fr $(OBJS) $(DEP_FILES) \
+	@rm -fr $(OBJS) $(DEP_FILES) \
 			$(BONUS_OBJS) $(BONUS_DEP_FILES) \
 			*~
 
 fclean: clean
-	rm -f $(NAME) TAGS ./a.out
+	@rm -f $(NAME) TAGS ./a.out
 
 re: fclean all
 

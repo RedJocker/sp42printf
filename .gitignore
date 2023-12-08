@@ -15,3 +15,5 @@
 **/tests/
 
 **/a.out
+
+warning_printf_tester

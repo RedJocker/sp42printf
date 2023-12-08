@@ -6,7 +6,7 @@
 /*   By: maurodri <maurodri@student.42sp...>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 16:03:50 by maurodri          #+#    #+#             */
-/*   Updated: 2023/12/04 19:32:14 by maurodri         ###   ########.fr       */
+/*   Updated: 2023/12/07 22:33:24 by maurodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ size_t	ft_strlen(const char *str);
 // presenter_utils2_bonus.c
 int		ft_putnbr_hex(unsigned long long nbr, char *hexbase);
 void	fill_string(char *str, char filler, unsigned int size);
-void	hex_num_string(char *dest, int size, unsigned long long n, char *xbase);
+char 	*hex_num_string(unsigned long long n, char *xbase, int precision);
 int		hex_num_size(unsigned long long nbr);
 void	*ft_memcpy(void *dst, const void *src, size_t n);
 #endif
