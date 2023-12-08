@@ -6,7 +6,7 @@
 /*   By: maurodri <maurodri@student.42sp...>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 18:42:55 by maurodri          #+#    #+#             */
-/*   Updated: 2023/12/07 22:33:15 by maurodri         ###   ########.fr       */
+/*   Updated: 2023/12/08 01:45:04 by maurodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,12 @@
 //#define ARGS "==%10p==", &ret
 //#define ARGS "==%10p==", (void *) 1300874
 //#define ARGS "==%-10p==", (void *) 1399990
-#define ARGS "==%-20.10p==", (void *) 1399990
+#define ARGS "==%20.10p==", (void *) 1399990
+//define ARGS "==%10.1p==", (void *) 1399990
+//#define ARGS "==%10p==", (void *) 0
+//#define ARGS "==%-10p==", (void *) 0
+//#define ARGS "==%p==", (void *) 0
+
 
 int	main(void)
 {

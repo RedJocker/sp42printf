@@ -6,7 +6,7 @@
 /*   By: maurodri <maurodri@student.42sp...>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 16:04:23 by maurodri          #+#    #+#             */
-/*   Updated: 2023/12/07 22:33:14 by maurodri         ###   ########.fr       */
+/*   Updated: 2023/12/08 01:07:46 by maurodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	*ft_memcpy(void *dst, const void *src, size_t n)
 	return (dst);
 }
 
-int		hex_num_size(unsigned long long nbr)
+int	hex_num_size(unsigned long long nbr)
 {
 	int	size;
 
@@ -71,29 +71,30 @@ int		hex_num_size(unsigned long long nbr)
 	return (size);
 }
 
-
-char 	*hex_num_string(unsigned long long n, char *xbase, int precision)
+char	*hex_num_string(unsigned long long n, char *xbase, int precision)
 {
 	int		i;
 	int		size;
 	char	*num_str;
-	
+
 	size = hex_num_size(n);
 	if (precision > size)
 		size = precision;
 	num_str = malloc(size * sizeof(char));
+	fill_string(num_str, ' ', size);
 	i = 0;
+	num_str[size] = '\0'; 
 	if (n == 0)
 		num_str[0] = '0';
 	else
+	{
 		while (n != 0)
 		{
 			num_str[size - 1 - i++] = xbase[n % 16];
-			n /= 16; 
+			n /= 16;
 		}
-	while (size - 1 - i > 0)
+	}
+	while (size - 1 - i >= 0)
 		num_str[size - 1 - i++] = '0';
-	num_str[size] = '\0';
-	return num_str;
+	return (num_str);
 }
-

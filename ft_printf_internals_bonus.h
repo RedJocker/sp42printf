@@ -6,7 +6,7 @@
 /*   By: maurodri <maurodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 00:10:50 by maurodri          #+#    #+#             */
-/*   Updated: 2023/11/27 19:07:56 by maurodri         ###   ########.fr       */
+/*   Updated: 2023/12/08 01:04:27 by maurodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@
 typedef enum e_flags
 {
 	NONE = 0,
-	LEFT_JUSTIFY = 1,	//'-'
-	ZERO_PAD = 2,		//'0'
-	SIGNED = 4,			//'+'
-	SPACE = 8,			//' '
-	HASHTAG = 16,		//'#'
+	LEFT_JUSTIFY = 1,
+	ZERO_PAD = 2,
+	SIGNED = 4,
+	SPACE = 8,
+	HASHTAG = 16,
 }	t_flags;
 
 typedef enum e_conversion
