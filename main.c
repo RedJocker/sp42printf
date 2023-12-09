@@ -6,7 +6,7 @@
 /*   By: maurodri <maurodri@student.42sp...>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 18:42:55 by maurodri          #+#    #+#             */
-/*   Updated: 2023/12/08 01:45:04 by maurodri         ###   ########.fr       */
+/*   Updated: 2023/12/08 23:43:35 by maurodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,21 @@
 //#define ARGS "==%10p==", &ret
 //#define ARGS "==%10p==", (void *) 1300874
 //#define ARGS "==%-10p==", (void *) 1399990
-#define ARGS "==%20.10p==", (void *) 1399990
+//#define ARGS "==%20.10p==", (void *) 1399990
 //define ARGS "==%10.1p==", (void *) 1399990
 //#define ARGS "==%10p==", (void *) 0
 //#define ARGS "==%-10p==", (void *) 0
 //#define ARGS "==%p==", (void *) 0
+//#define ARGS "==%2p==", (void *) -1
+//#define ARGS "==%-2p==", (void *) -1
+//#define ARGS "==%-9p==", (void *) LONG_MIN
+//#define ARGS "==%-9p==", (void *) LONG_MAX
+//#define ARGS "==%-9p==", (void *) &ret
+#define ARGS "==%-9%=="
+
+//52: 	TEST(26, print(" %-9p %-10p ", LONG_MIN, LONG_MAX));
+//53: 	TEST(27, print(" %-11p %-12p ", INT_MIN, INT_MAX));
+//55: 	TEST(29, print(" %-1p %-2p ", 0, 0));
 
 
 int	main(void)

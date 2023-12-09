@@ -6,7 +6,7 @@
 /*   By: maurodri <maurodri@student.42sp...>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 16:03:52 by maurodri          #+#    #+#             */
-/*   Updated: 2023/12/08 01:53:20 by maurodri         ###   ########.fr       */
+/*   Updated: 2023/12/08 22:50:37 by maurodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ static void	present_pointer_left_justify(
 	ft_memcpy(*out_str_ptr + 2, num_str, num_str_len);
 }
 
-static int	present_pointer_num(int num, t_format *fmt, char **out_str_ptr)
+static int	present_pointer_num(
+	unsigned long long num, t_format *fmt, char **out_str_ptr)
 {
 	char	*num_str;
 	int		num_strlen;
