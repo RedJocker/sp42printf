@@ -6,7 +6,7 @@
 #    By: maurodri <maurodri@student.42sp...>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/28 21:13:25 by maurodri          #+#    #+#              #
-#    Updated: 2023/12/07 19:58:27 by maurodri         ###   ########.fr        #
+#    Updated: 2023/12/09 22:54:42 by maurodri         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -79,7 +79,7 @@ $(NAME): $(OBJS)
 #	@echo "OBJS $(OBJS)"
 	@rm -f $(NAME) $(CLEAR)
 	@ar rcs $(NAME) $^
-	@etags $(wildcard *.c) $(wildcard */*.c) $(HEADERS) 
+	@etags $(wildcard *_bonus.c) $(wildcard */*_bonus.c) $(wildcard *_bonus.h) $(wildcard */*_bonus.h) 
 
 $(OBJS): %.o : %.c
 	@$(CC) $(CFLAGS) -c $< -o $@ $(DEP_FLAGS)
