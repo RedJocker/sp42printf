@@ -6,7 +6,7 @@
 #    By: maurodri <maurodri@student.42sp...>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/28 21:13:25 by maurodri          #+#    #+#              #
-#    Updated: 2023/12/12 19:28:08 by maurodri         ###   ########.fr        #
+#    Updated: 2023/12/13 18:59:11 by maurodri         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -43,6 +43,7 @@ BONUS_FILES =  ft_printf_bonus.c \
 		presenter_bonus.c \
 		presenter_utils_bonus.c \
 		presenter_utils2_bonus.c \
+		presenter_utils3_bonus.c \
 		present_string_bonus.c \
 		present_base10_bonus.c \
 		present_ubase10_bonus.c \

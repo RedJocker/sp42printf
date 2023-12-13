@@ -6,7 +6,7 @@
 /*   By: maurodri <maurodri@student.42sp...>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 16:04:23 by maurodri          #+#    #+#             */
-/*   Updated: 2023/12/12 21:53:59 by maurodri         ###   ########.fr       */
+/*   Updated: 2023/12/13 20:24:37 by maurodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,21 +43,6 @@ void	fill_string(char *str, char filler, unsigned int size)
 		str[i++] = filler;
 }
 
-void	*ft_memcpy(void *dst, const void *src, size_t n)
-{
-	size_t	i;
-
-	if (dst == NULL && src == NULL)
-		return (NULL);
-	i = 0;
-	while (i < n)
-	{
-		((char *) dst)[i] = ((char *) src)[i];
-		i++;
-	}
-	return (dst);
-}
-
 int	hex_num_size(unsigned long long nbr)
 {
 	int	size;
@@ -71,6 +56,18 @@ int	hex_num_size(unsigned long long nbr)
 	return (size);
 }
 
+static int	hex_num_string_precision(t_format *fmt)
+{
+	int		precision;
+
+	if (has_flags(fmt, 1, ZERO_PAD)
+		&& !has_flags(fmt, 1, LEFT_JUSTIFY) && fmt->precision == -1)
+		precision = fmt->width - 2;
+	else
+		precision = fmt->precision;
+	return (precision);
+}
+
 char	*hex_num_string(unsigned long long n, char *xbase, t_format *fmt)
 {
 	int		i;
@@ -78,18 +75,16 @@ char	*hex_num_string(unsigned long long n, char *xbase, t_format *fmt)
 	char	*num_str;
 	int		precision;
 
-	if(has_flags(fmt, 1, ZERO_PAD)
-	   && !has_flags(fmt, 1, LEFT_JUSTIFY) && fmt->precision == -1)
-		precision = fmt->width - 2;
-	else
-		precision = fmt->precision;
+	precision = hex_num_string_precision(fmt);
 	size = hex_num_size(n);
 	if (precision > size)
 		size = precision;
-	num_str = malloc(size * sizeof(char));
+	num_str = malloc((size + 1) * sizeof(char));
+	if (!num_str)
+		return ((char *) 0);
 	fill_string(num_str, ' ', size);
 	i = 0;
-	num_str[size] = '\0'; 
+	num_str[size] = '\0';
 	if (n == 0)
 		num_str[0] = '0';
 	else
@@ -97,10 +92,13 @@ char	*hex_num_string(unsigned long long n, char *xbase, t_format *fmt)
 		while (n != 0)
 		{
 			num_str[size - 1 - i++] = xbase[n % 16];
+			//num_str[size-- - 1] = xbase[n % 16];
 			n /= 16;
 		}
 	}
 	while (size - 1 - i >= 0)
 		num_str[size - 1 - i++] = '0';
+	//while (size-- - 1>= 0)
+	//	num_str[size-- - 1] = '0';
 	return (num_str);
 }

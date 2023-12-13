@@ -6,7 +6,7 @@
 /*   By: maurodri <maurodri@student.42sp...>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 16:03:52 by maurodri          #+#    #+#             */
-/*   Updated: 2023/12/12 21:33:38 by maurodri         ###   ########.fr       */
+/*   Updated: 2023/12/13 19:51:15 by maurodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,69 +31,53 @@ static int	present_pointer_null(t_format *fmt, char **out_str_ptr)
 }
 
 static void	present_pointer_left_justify(
-	t_format *fmt, char *num_str, int num_str_len, char **out_str_ptr)
+	t_format *fmt, char *num_str, int num_str_len, char *outstr)
 {
-	char	*ptr;
-
 	if (has_flags(fmt, 1, SIGNED))
-	{
-		ptr = *out_str_ptr;
-		ft_memcpy(ptr++, "+", 1);
-	}
+		ft_memcpy(outstr++, "+", 1);
 	else if (has_flags(fmt, 1, SPACE))
-		ptr = *out_str_ptr + 1;
-	else
-		ptr = *out_str_ptr;
-	ft_memcpy(ptr, "0x", 2);
-	ft_memcpy(ptr + 2, num_str, num_str_len);
+		outstr++;
+	ft_memcpy(outstr, "0x", 2);
+	ft_memcpy(outstr + 2, num_str, num_str_len);
 }
 
-static int size_out_len(int xlen, t_format *fmt)
+static void	present_pointer_right_justify(
+	t_format *fmt, char *numstr, int numstr_len, char *outstr)
 {
-	int	out_strlen;
-
-	out_strlen = 0;
-	if (fmt->width > xlen)
-		out_strlen = fmt->width;
-	else
-	{
-		if (has_flags(fmt, 1, SPACE) || has_flags(fmt, 1, SIGNED))
-			out_strlen = xlen + 1;
-		else
-			out_strlen = xlen;
-	}
-	return (out_strlen);
+	if (has_flags(fmt, 1, SIGNED))
+		ft_memcpy(outstr++, "+", 1);
+	ft_memcpy(outstr, "0x", 2);
+	ft_memcpy(outstr + 2, numstr, numstr_len);
 }
 
 static int	present_pointer_num(
-	unsigned long long num, t_format *fmt, char **out_str_ptr)
+	unsigned long long num, t_format *fmt, char **outstr_ptr)
 {
-	char	*num_str;
-	int		num_strlen;
-	int		out_strlen;
+	char	*numstr;
+	int		numstr_len;
+	int		outstr_len;
 	char	*ptr;
 
-	num_str = hex_num_string(num, XBASEL, fmt);
-	if (!num_str)
+	numstr = hex_num_string(num, XBASEL, fmt);
+	if (!numstr)
 		return (-1);
-	num_strlen = ft_strlen(num_str);
-	out_strlen = size_out_len(num_strlen + 2, fmt);
-	*out_str_ptr = malloc(out_strlen * sizeof(char));
-	if (!(*out_str_ptr))
+	numstr_len = ft_strlen(numstr);
+	outstr_len = pfmt_size_outstr(numstr_len + 2, fmt);
+	*outstr_ptr = malloc(outstr_len * sizeof(char));
+	if (!(*outstr_ptr))
 		return (-1);
-	fill_string(*out_str_ptr, ' ', out_strlen);
+	fill_string(*outstr_ptr, ' ', outstr_len);
 	if (has_flags(fmt, 1, LEFT_JUSTIFY))
-		present_pointer_left_justify(fmt, num_str, num_strlen, out_str_ptr);
+		present_pointer_left_justify(fmt, numstr, numstr_len, *outstr_ptr);
 	else
 	{
-		ptr = *out_str_ptr + out_strlen - (num_strlen + 2);
-		if(has_flags(fmt, 1, SIGNED))
-			ft_memcpy(ptr - 1, "+", 1);
-		ft_memcpy(ptr, "0x", 2);
-		ft_memcpy(ptr + 2, num_str, num_strlen);
+		ptr = *outstr_ptr + outstr_len - (numstr_len + 2);
+		if (has_flags(fmt, 1, SIGNED))
+			ptr--;
+		present_pointer_right_justify(fmt, numstr, numstr_len, ptr);
 	}
-	free(num_str);
-	return (out_strlen);
+	free(numstr);
+	return (outstr_len);
 }
 
 int	present_pointer(t_format *fmt, va_list *lst)

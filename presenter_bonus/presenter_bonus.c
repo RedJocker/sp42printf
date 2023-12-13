@@ -6,14 +6,13 @@
 /*   By: maurodri <maurodri@student.42sp...>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 16:02:30 by maurodri          #+#    #+#             */
-/*   Updated: 2023/12/04 12:56:35 by maurodri         ###   ########.fr       */
+/*   Updated: 2023/12/13 18:47:20 by maurodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "presenter_utils_bonus.h"
 #include "presenter_bonus.h"
 
-#include <stdio.h>
 int	present_format(t_format *format, va_list *lst)
 {
 	if (format->conversion == STRING)
