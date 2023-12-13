@@ -6,7 +6,7 @@
 /*   By: maurodri <maurodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 00:10:50 by maurodri          #+#    #+#             */
-/*   Updated: 2023/12/08 01:04:27 by maurodri         ###   ########.fr       */
+/*   Updated: 2023/12/12 19:27:35 by maurodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,5 @@ typedef struct s_format
 	t_conversion	conversion;
 }	t_format;
 
+int	has_flags(t_format *fmt, int num_flags, ...);
 #endif

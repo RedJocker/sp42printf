@@ -6,7 +6,7 @@
 #    By: maurodri <maurodri@student.42sp...>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/28 21:13:25 by maurodri          #+#    #+#              #
-#    Updated: 2023/12/09 22:54:42 by maurodri         ###   ########.fr        #
+#    Updated: 2023/12/12 19:28:08 by maurodri         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -36,6 +36,7 @@ HEADERS = ft_printf.h \
 		presenter/presenter_utils.h
 
 BONUS_FILES =  ft_printf_bonus.c \
+		flag_utils_bonus.c \
 		parser_bonus.c \
 		parser_utils_bonus.c \
 		parser_format_args_bonus.c \
@@ -49,7 +50,7 @@ BONUS_FILES =  ft_printf_bonus.c \
 		present_escape_bonus.c \
 		present_hexa_lower_bonus.c \
 		present_hexa_upper_bonus.c \
-		present_pointer_bonus.c
+		present_pointer_bonus.c 
 
 VPATH = ./parser/ ./presenter/ ./parser_bonus/ ./presenter_bonus/
 DEP_FILES = $(patsubst %.c,%.d,$(FILES))

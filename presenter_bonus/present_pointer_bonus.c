@@ -6,7 +6,7 @@
 /*   By: maurodri <maurodri@student.42sp...>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 16:03:52 by maurodri          #+#    #+#             */
-/*   Updated: 2023/12/08 22:50:37 by maurodri         ###   ########.fr       */
+/*   Updated: 2023/12/12 21:33:38 by maurodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,38 @@ static int	present_pointer_null(t_format *fmt, char **out_str_ptr)
 }
 
 static void	present_pointer_left_justify(
-	char *num_str, int num_str_len, char **out_str_ptr)
+	t_format *fmt, char *num_str, int num_str_len, char **out_str_ptr)
 {
-	ft_memcpy(*out_str_ptr, "0x", 2);
-	ft_memcpy(*out_str_ptr + 2, num_str, num_str_len);
+	char	*ptr;
+
+	if (has_flags(fmt, 1, SIGNED))
+	{
+		ptr = *out_str_ptr;
+		ft_memcpy(ptr++, "+", 1);
+	}
+	else if (has_flags(fmt, 1, SPACE))
+		ptr = *out_str_ptr + 1;
+	else
+		ptr = *out_str_ptr;
+	ft_memcpy(ptr, "0x", 2);
+	ft_memcpy(ptr + 2, num_str, num_str_len);
+}
+
+static int size_out_len(int xlen, t_format *fmt)
+{
+	int	out_strlen;
+
+	out_strlen = 0;
+	if (fmt->width > xlen)
+		out_strlen = fmt->width;
+	else
+	{
+		if (has_flags(fmt, 1, SPACE) || has_flags(fmt, 1, SIGNED))
+			out_strlen = xlen + 1;
+		else
+			out_strlen = xlen;
+	}
+	return (out_strlen);
 }
 
 static int	present_pointer_num(
@@ -42,26 +70,27 @@ static int	present_pointer_num(
 {
 	char	*num_str;
 	int		num_strlen;
-	int		xlen;
 	int		out_strlen;
+	char	*ptr;
 
-	num_str = hex_num_string(num, XBASEL, fmt->precision);
+	num_str = hex_num_string(num, XBASEL, fmt);
 	if (!num_str)
 		return (-1);
 	num_strlen = ft_strlen(num_str);
-	xlen = num_strlen + 2;
-	out_strlen = ((fmt->width > xlen) * fmt->width)
-		+ ((fmt->width <= xlen) * xlen);
+	out_strlen = size_out_len(num_strlen + 2, fmt);
 	*out_str_ptr = malloc(out_strlen * sizeof(char));
 	if (!(*out_str_ptr))
 		return (-1);
 	fill_string(*out_str_ptr, ' ', out_strlen);
-	if ((fmt->flags & LEFT_JUSTIFY) == LEFT_JUSTIFY)
-		present_pointer_left_justify(num_str, num_strlen, out_str_ptr);
+	if (has_flags(fmt, 1, LEFT_JUSTIFY))
+		present_pointer_left_justify(fmt, num_str, num_strlen, out_str_ptr);
 	else
 	{
-		ft_memcpy(*out_str_ptr + (out_strlen - xlen), "0x", 2);
-		ft_memcpy(*out_str_ptr +(out_strlen - num_strlen), num_str, num_strlen);
+		ptr = *out_str_ptr + out_strlen - (num_strlen + 2);
+		if(has_flags(fmt, 1, SIGNED))
+			ft_memcpy(ptr - 1, "+", 1);
+		ft_memcpy(ptr, "0x", 2);
+		ft_memcpy(ptr + 2, num_str, num_strlen);
 	}
 	free(num_str);
 	return (out_strlen);

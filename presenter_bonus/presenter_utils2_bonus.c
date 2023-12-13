@@ -6,7 +6,7 @@
 /*   By: maurodri <maurodri@student.42sp...>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 16:04:23 by maurodri          #+#    #+#             */
-/*   Updated: 2023/12/08 01:07:46 by maurodri         ###   ########.fr       */
+/*   Updated: 2023/12/12 21:53:59 by maurodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,12 +71,18 @@ int	hex_num_size(unsigned long long nbr)
 	return (size);
 }
 
-char	*hex_num_string(unsigned long long n, char *xbase, int precision)
+char	*hex_num_string(unsigned long long n, char *xbase, t_format *fmt)
 {
 	int		i;
 	int		size;
 	char	*num_str;
+	int		precision;
 
+	if(has_flags(fmt, 1, ZERO_PAD)
+	   && !has_flags(fmt, 1, LEFT_JUSTIFY) && fmt->precision == -1)
+		precision = fmt->width - 2;
+	else
+		precision = fmt->precision;
 	size = hex_num_size(n);
 	if (precision > size)
 		size = precision;
