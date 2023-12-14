@@ -6,7 +6,7 @@
 /*   By: maurodri <maurodri@student.42sp...>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 18:58:47 by maurodri          #+#    #+#             */
-/*   Updated: 2023/12/13 20:07:42 by maurodri         ###   ########.fr       */
+/*   Updated: 2023/12/13 20:58:23 by maurodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,3 +45,11 @@ void	*ft_memcpy(void *dst, const void *src, size_t n)
 	return (dst);
 }
 
+void	fill_string(char *str, char filler, unsigned int size)
+{
+	unsigned int	i;
+
+	i = 0;
+	while (i < size)
+		str[i++] = filler;
+}

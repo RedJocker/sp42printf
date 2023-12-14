@@ -6,7 +6,7 @@
 /*   By: maurodri <maurodri@student.42sp...>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 16:04:23 by maurodri          #+#    #+#             */
-/*   Updated: 2023/12/13 20:24:37 by maurodri         ###   ########.fr       */
+/*   Updated: 2023/12/13 20:57:38 by maurodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,16 +34,7 @@ int	ft_putnbr_hex(unsigned long long nbr, char *hexbase)
 	return (size);
 }
 
-void	fill_string(char *str, char filler, unsigned int size)
-{
-	unsigned int	i;
-
-	i = 0;
-	while (i < size)
-		str[i++] = filler;
-}
-
-int	hex_num_size(unsigned long long nbr)
+int	hex_num_size(unsigned long long nbr, int precision)
 {
 	int	size;
 
@@ -53,12 +44,15 @@ int	hex_num_size(unsigned long long nbr)
 	else
 		while (nbr != 0)
 			nbr /= 16 + (0 * size++);
-	return (size);
+	if (precision > size)
+		return (precision);
+	else
+		return (size);
 }
 
 static int	hex_num_string_precision(t_format *fmt)
 {
-	int		precision;
+	int	precision;
 
 	if (has_flags(fmt, 1, ZERO_PAD)
 		&& !has_flags(fmt, 1, LEFT_JUSTIFY) && fmt->precision == -1)
@@ -66,6 +60,20 @@ static int	hex_num_string_precision(t_format *fmt)
 	else
 		precision = fmt->precision;
 	return (precision);
+}
+
+static int	fill_hex_num(
+	char *num_str, unsigned long long n, int size, char *xbase)
+{
+	int	i;
+
+	i = 0;
+	while (n != 0)
+	{
+		num_str[size - 1 - i++] = xbase[n % 16];
+		n /= 16;
+	}
+	return (i);
 }
 
 char	*hex_num_string(unsigned long long n, char *xbase, t_format *fmt)
@@ -76,9 +84,7 @@ char	*hex_num_string(unsigned long long n, char *xbase, t_format *fmt)
 	int		precision;
 
 	precision = hex_num_string_precision(fmt);
-	size = hex_num_size(n);
-	if (precision > size)
-		size = precision;
+	size = hex_num_size(n, precision);
 	num_str = malloc((size + 1) * sizeof(char));
 	if (!num_str)
 		return ((char *) 0);
@@ -88,17 +94,8 @@ char	*hex_num_string(unsigned long long n, char *xbase, t_format *fmt)
 	if (n == 0)
 		num_str[0] = '0';
 	else
-	{
-		while (n != 0)
-		{
-			num_str[size - 1 - i++] = xbase[n % 16];
-			//num_str[size-- - 1] = xbase[n % 16];
-			n /= 16;
-		}
-	}
+		i = fill_hex_num(num_str, n, size, xbase);
 	while (size - 1 - i >= 0)
 		num_str[size - 1 - i++] = '0';
-	//while (size-- - 1>= 0)
-	//	num_str[size-- - 1] = '0';
 	return (num_str);
 }
