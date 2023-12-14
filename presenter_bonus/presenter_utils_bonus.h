@@ -6,7 +6,7 @@
 /*   By: maurodri <maurodri@student.42sp...>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 16:03:50 by maurodri          #+#    #+#             */
-/*   Updated: 2023/12/13 20:55:22 by maurodri         ###   ########.fr       */
+/*   Updated: 2023/12/13 21:55:59 by maurodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define PRESENTER_UTILS_BONUS_H
 
 # include <unistd.h>
+# include <stdlib.h>
 # include "../ft_printf_internals_bonus.h"
 
 # define XBASEL "0123456789abcdef"

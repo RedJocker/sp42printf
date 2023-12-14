@@ -6,13 +6,12 @@
 /*   By: maurodri <maurodri@student.42sp...>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 16:03:52 by maurodri          #+#    #+#             */
-/*   Updated: 2023/12/13 19:51:15 by maurodri         ###   ########.fr       */
+/*   Updated: 2023/12/13 21:56:19 by maurodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "presenter_utils_bonus.h"
 #include "presenter_bonus.h"
-#include <stdlib.h>
 
 static int	present_pointer_null(t_format *fmt, char **out_str_ptr)
 {

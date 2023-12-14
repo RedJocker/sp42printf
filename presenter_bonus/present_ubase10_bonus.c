@@ -6,28 +6,166 @@
 /*   By: maurodri <maurodri@student.42sp...>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 16:03:54 by maurodri          #+#    #+#             */
-/*   Updated: 2023/12/04 12:50:59 by maurodri         ###   ########.fr       */
+/*   Updated: 2023/12/13 22:37:18 by maurodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "presenter_utils_bonus.h"
 #include "presenter_bonus.h"
 
+static int	ubase10_num_size(unsigned long long nbr, int precision)
+{
+	int	size;
+
+	size = 0;
+	if (nbr == 0)
+		size = 1;
+	else
+		while (nbr != 0)
+			nbr /= 10 + (0 * size++);
+	if (precision > size)
+		return (precision);
+	else
+		return (size);
+}
+
+
+static int	ubase10_precision(t_format *fmt)
+{
+	int	precision;
+
+	if (has_flags(fmt, 1, ZERO_PAD)
+		&& !has_flags(fmt, 1, LEFT_JUSTIFY) && fmt->precision == -1)
+		precision = fmt->width;
+	else
+		precision = fmt->precision;
+	return (precision);
+}
+
+static int	fill_ubase10_num(
+	char *num_str, unsigned long long n, int size)
+{
+	int		i;
+	char	digit;
+
+	i = 0;
+	while (n != 0)
+	{
+		digit = '0' + (n % 10);
+		num_str[size - 1 - i++] = digit;
+		n /= 10;
+	}
+	return (i);
+}
+
+static char	*ubase10_str(unsigned long long n, t_format *fmt)
+{
+	int		i;
+	int		size;
+	char	*num_str;
+	int		precision;
+
+	precision = ubase10_precision(fmt);
+	size = ubase10_num_size(n, precision);
+	num_str = malloc((size + 1) * sizeof(char));
+	if (!num_str)
+		return ((char *) 0);
+	fill_string(num_str, ' ', size);
+	i = 0;
+	num_str[size] = '\0';
+	if (n == 0 && precision > 0)
+		num_str[0] = '0'; 
+	else
+		i = fill_ubase10_num(num_str, n, size);
+	while (size - 1 - i >= 0)
+		num_str[size - 1 - i++] = '0';
+	return (num_str);
+}
+
+static int	ubase10_size_outstr(int len, t_format *fmt)
+{
+	int	outstr_len;
+
+	outstr_len = 0;
+	if (fmt->width > len)
+		outstr_len = fmt->width;
+	else
+	{
+		//if (has_flags(fmt, 1, SPACE) || has_flags(fmt, 1, SIGNED))
+		//outstr_len = xlen + 1;
+		//else
+			outstr_len = len;
+	}
+	return (outstr_len);
+}
+
+
+static void	present_ubase10_left_justify(
+	t_format *fmt, char *num_str, int num_str_len, char *outstr)
+{
+	//if (has_flags(fmt, 1, SIGNED))
+	//	ft_memcpy(outstr++, "+", 1);
+	//else if (has_flags(fmt, 1, SPACE))
+	//	outstr++;
+	//ft_memcpy(outstr, "0x", 2);
+	(void) fmt;
+	ft_memcpy(outstr, num_str, num_str_len);
+}
+
+static void	present_ubase10_right_justify(
+	t_format *fmt, char *numstr, int numstr_len, char *outstr)
+{
+	//if (has_flags(fmt, 1, SIGNED))
+	//	ft_memcpy(outstr++, "+", 1);
+	//ft_memcpy(outstr, "0x", 2);
+	(void) fmt;
+	ft_memcpy(outstr, numstr, numstr_len);
+}
+
+
+
+static int	present_ubase10_num(
+	unsigned long long num, t_format *fmt, char **outstr_ptr)
+{
+	char	*numstr;
+	int		numstr_len;
+	int		outstr_len;
+	char	*ptr;
+
+	numstr = ubase10_str(num, fmt);
+	if (!numstr)
+		return (-1);
+	numstr_len = ft_strlen(numstr);
+	outstr_len = ubase10_size_outstr(numstr_len, fmt);
+	*outstr_ptr = malloc(outstr_len * sizeof(char));
+	if (!(*outstr_ptr))
+		return (-1);
+	fill_string(*outstr_ptr, ' ', outstr_len);
+	if (has_flags(fmt, 1, LEFT_JUSTIFY))
+		present_ubase10_left_justify(fmt, numstr, numstr_len, *outstr_ptr);
+	else
+	{
+		ptr = *outstr_ptr + outstr_len - (numstr_len);
+		//if (has_flags(fmt, 1, SIGNED))
+		//ptr--;
+		present_ubase10_right_justify(fmt, numstr, numstr_len, ptr);
+	}
+	free(numstr);
+	return (outstr_len);
+}
+
 int	present_ubase10(t_format *format, va_list *lst)
 {
-	unsigned int	num;
-	int				size;
+	unsigned long long	num;
+	char				*out_str;
+	int					out_str_len;
 
-	(void) format;
-	num = va_arg(*lst, unsigned int);
-	ft_putunbr_fd(num, 1);
-	if (num == 0)
-		return (1);
-	size = 0;
-	while (num != 0)
-	{
-		size++;
-		num /= 10;
-	}
-	return (size);
+	out_str_len = 0;
+	num = va_arg(*lst, unsigned long long);
+	out_str_len = present_ubase10_num(num, format, &out_str);
+	if (!out_str)
+		return (-1);
+	write(1, out_str, out_str_len);
+	free(out_str);
+	return (out_str_len);
 }
