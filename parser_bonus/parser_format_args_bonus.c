@@ -6,7 +6,7 @@
 /*   By: maurodri <maurodri@student.42sp...>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 16:10:15 by maurodri          #+#    #+#             */
-/*   Updated: 2023/12/13 20:59:54 by maurodri         ###   ########.fr       */
+/*   Updated: 2023/12/14 16:29:33 by maurodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,11 @@ int	parse_width(t_format *format, char **str_ptr)
 
 int	parse_precision(t_format *format, char **str_ptr)
 {
-	format->precision = -1;
+	format->precision = 0;
 	if (**str_ptr == '.')
 	{
 		(*str_ptr)++;
-		format->precision = parse_number(str_ptr);
+		format->precision = parse_number_precision(str_ptr);
 	}
 	return (1);
 }

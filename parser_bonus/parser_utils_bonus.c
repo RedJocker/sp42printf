@@ -6,7 +6,7 @@
 /*   By: maurodri <maurodri@student.42sp...>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 16:10:16 by maurodri          #+#    #+#             */
-/*   Updated: 2023/12/04 14:01:19 by maurodri         ###   ########.fr       */
+/*   Updated: 2023/12/14 16:29:37 by maurodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,20 @@ int	parse_number(char **str)
 	{
 		num = (num * 10) + (**str - '0');
 		(*str)++;
+	}
+	return (num);
+}
+
+int	parse_number_precision(char **str)
+{
+	int	num;
+
+	num = -1;
+	if (**str >= '0' && **str <= '9')
+	{
+		num = parse_number(str);
+		if (num == 0)
+			num = -1;
 	}
 	return (num);
 }

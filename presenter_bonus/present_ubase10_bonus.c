@@ -6,7 +6,7 @@
 /*   By: maurodri <maurodri@student.42sp...>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 16:03:54 by maurodri          #+#    #+#             */
-/*   Updated: 2023/12/13 22:37:18 by maurodri         ###   ########.fr       */
+/*   Updated: 2023/12/14 18:36:15 by maurodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static int	ubase10_num_size(unsigned long long nbr, int precision)
 	int	size;
 
 	size = 0;
-	if (nbr == 0)
+	if (nbr == 0 && precision > -1)
 		size = 1;
 	else
 		while (nbr != 0)
@@ -35,7 +35,9 @@ static int	ubase10_precision(t_format *fmt)
 	int	precision;
 
 	if (has_flags(fmt, 1, ZERO_PAD)
-		&& !has_flags(fmt, 1, LEFT_JUSTIFY) && fmt->precision == -1)
+		&& !has_flags(fmt, 1, LEFT_JUSTIFY)
+		&& fmt->precision == 0
+		&& fmt->width > 0)
 		precision = fmt->width;
 	else
 		precision = fmt->precision;
@@ -73,7 +75,7 @@ static char	*ubase10_str(unsigned long long n, t_format *fmt)
 	fill_string(num_str, ' ', size);
 	i = 0;
 	num_str[size] = '\0';
-	if (n == 0 && precision > 0)
+	if (n == 0 && precision == 0)
 		num_str[0] = '0'; 
 	else
 		i = fill_ubase10_num(num_str, n, size);
@@ -91,38 +93,10 @@ static int	ubase10_size_outstr(int len, t_format *fmt)
 		outstr_len = fmt->width;
 	else
 	{
-		//if (has_flags(fmt, 1, SPACE) || has_flags(fmt, 1, SIGNED))
-		//outstr_len = xlen + 1;
-		//else
 			outstr_len = len;
 	}
 	return (outstr_len);
 }
-
-
-static void	present_ubase10_left_justify(
-	t_format *fmt, char *num_str, int num_str_len, char *outstr)
-{
-	//if (has_flags(fmt, 1, SIGNED))
-	//	ft_memcpy(outstr++, "+", 1);
-	//else if (has_flags(fmt, 1, SPACE))
-	//	outstr++;
-	//ft_memcpy(outstr, "0x", 2);
-	(void) fmt;
-	ft_memcpy(outstr, num_str, num_str_len);
-}
-
-static void	present_ubase10_right_justify(
-	t_format *fmt, char *numstr, int numstr_len, char *outstr)
-{
-	//if (has_flags(fmt, 1, SIGNED))
-	//	ft_memcpy(outstr++, "+", 1);
-	//ft_memcpy(outstr, "0x", 2);
-	(void) fmt;
-	ft_memcpy(outstr, numstr, numstr_len);
-}
-
-
 
 static int	present_ubase10_num(
 	unsigned long long num, t_format *fmt, char **outstr_ptr)
@@ -142,13 +116,11 @@ static int	present_ubase10_num(
 		return (-1);
 	fill_string(*outstr_ptr, ' ', outstr_len);
 	if (has_flags(fmt, 1, LEFT_JUSTIFY))
-		present_ubase10_left_justify(fmt, numstr, numstr_len, *outstr_ptr);
+		ft_memcpy(*outstr_ptr, numstr, numstr_len);
 	else
 	{
 		ptr = *outstr_ptr + outstr_len - (numstr_len);
-		//if (has_flags(fmt, 1, SIGNED))
-		//ptr--;
-		present_ubase10_right_justify(fmt, numstr, numstr_len, ptr);
+		ft_memcpy(ptr, numstr, numstr_len);
 	}
 	free(numstr);
 	return (outstr_len);
@@ -156,16 +128,22 @@ static int	present_ubase10_num(
 
 int	present_ubase10(t_format *format, va_list *lst)
 {
+	long long			n;
 	unsigned long long	num;
 	char				*out_str;
 	int					out_str_len;
 
 	out_str_len = 0;
-	num = va_arg(*lst, unsigned long long);
+	n = va_arg (*lst, long long);
+	if (n < 0)
+		num = 0;
+	else
+		num = (unsigned long long) n;
 	out_str_len = present_ubase10_num(num, format, &out_str);
 	if (!out_str)
 		return (-1);
-	write(1, out_str, out_str_len);
+	if (out_str_len > 0)
+		write(1, out_str, out_str_len);
 	free(out_str);
 	return (out_str_len);
 }

@@ -6,7 +6,7 @@
 /*   By: maurodri <maurodri@student.42sp...>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 16:10:17 by maurodri          #+#    #+#             */
-/*   Updated: 2023/12/13 21:00:37 by maurodri         ###   ########.fr       */
+/*   Updated: 2023/12/14 16:17:29 by maurodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 // parser_utils_bonus.c
 int	find_ch_or_end_index(char *str, char ch);
 int	parse_number(char **str);
+int	parse_number_precision(char **str);
 //
 
 #endif
