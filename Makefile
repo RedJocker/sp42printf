@@ -6,7 +6,7 @@
 #    By: maurodri <maurodri@student.42sp...>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/28 21:13:25 by maurodri          #+#    #+#              #
-#    Updated: 2023/12/13 18:59:11 by maurodri         ###   ########.fr        #
+#    Updated: 2023/12/28 20:44:21 by maurodri         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -76,9 +76,6 @@ endif
 all: $(NAME)
 
 $(NAME): $(OBJS)
-#	echo "NAME $(WITH_BONUS)"
-#	@echo "CLEAR $(CLEAR)"
-#	@echo "OBJS $(OBJS)"
 	@rm -f $(NAME) $(CLEAR)
 	@ar rcs $(NAME) $^
 	@etags $(wildcard *_bonus.c) $(wildcard */*_bonus.c) $(wildcard *_bonus.h) $(wildcard */*_bonus.h) 

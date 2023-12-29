@@ -6,14 +6,14 @@
 /*   By: maurodri <maurodri@student.42sp...>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 16:03:54 by maurodri          #+#    #+#             */
-/*   Updated: 2023/12/14 18:36:15 by maurodri         ###   ########.fr       */
+/*   Updated: 2023/12/28 23:08:33 by maurodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "presenter_utils_bonus.h"
 #include "presenter_bonus.h"
 
-static int	ubase10_num_size(unsigned long long nbr, int precision)
+static int	ubase10_num_size(unsigned int nbr, int precision)
 {
 	int	size;
 
@@ -45,7 +45,7 @@ static int	ubase10_precision(t_format *fmt)
 }
 
 static int	fill_ubase10_num(
-	char *num_str, unsigned long long n, int size)
+	char *num_str, unsigned int n, int size)
 {
 	int		i;
 	char	digit;
@@ -60,7 +60,7 @@ static int	fill_ubase10_num(
 	return (i);
 }
 
-static char	*ubase10_str(unsigned long long n, t_format *fmt)
+static char	*ubase10_str(unsigned int n, t_format *fmt)
 {
 	int		i;
 	int		size;
@@ -99,7 +99,7 @@ static int	ubase10_size_outstr(int len, t_format *fmt)
 }
 
 static int	present_ubase10_num(
-	unsigned long long num, t_format *fmt, char **outstr_ptr)
+	unsigned int num, t_format *fmt, char **outstr_ptr)
 {
 	char	*numstr;
 	int		numstr_len;
@@ -128,7 +128,7 @@ static int	present_ubase10_num(
 
 int	present_ubase10(t_format *format, va_list *lst)
 {
-	long long			n;
+	unsigned int		n;
 	unsigned long long	num;
 	char				*out_str;
 	int					out_str_len;
