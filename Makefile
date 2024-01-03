@@ -6,13 +6,13 @@
 #    By: maurodri <maurodri@student.42sp...>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/28 21:13:25 by maurodri          #+#    #+#              #
-#    Updated: 2023/12/28 20:44:21 by maurodri         ###   ########.fr        #
+#    Updated: 2024/01/03 05:06:50 by maurodri         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
-NAME = libftprintf.a
+NAME := libftprintf.a
 
-FILES = ft_printf.c \
+FILES := ft_printf.c \
 		parser.c \
 		parser_utils.c \
 		parser_format_args.c \
@@ -28,14 +28,14 @@ FILES = ft_printf.c \
 		present_hexa_upper.c \
 		present_pointer.c
 
-HEADERS = ft_printf.h \
+HEADERS := ft_printf.h \
 		ft_printf_internals.h \
 		parser/parser.h \
 		parser/parser_utils.h \
 		presenter/presenter.h \
 		presenter/presenter_utils.h
 
-BONUS_FILES =  ft_printf_bonus.c \
+BONUS_FILES :=  ft_printf_bonus.c \
 		flag_utils_bonus.c \
 		parser_bonus.c \
 		parser_utils_bonus.c \
@@ -51,7 +51,14 @@ BONUS_FILES =  ft_printf_bonus.c \
 		present_escape_bonus.c \
 		present_hexa_lower_bonus.c \
 		present_hexa_upper_bonus.c \
-		present_pointer_bonus.c 
+		present_pointer_bonus.c
+
+BONUS_HEADERS := ft_printf_bonus.h \
+				 ft_printf_internals_bonus.h \
+				 parser_bonus/parser_bonus.h \
+				 parser_bonus/parser_utils_bonus.h \
+				 presenter_bonus/presenter_bonus.h \
+				 presenter_bonus/presenter_utils_bonus.h
 
 VPATH = ./parser/ ./presenter/ ./parser_bonus/ ./presenter_bonus/
 DEP_FILES = $(patsubst %.c,%.d,$(FILES))

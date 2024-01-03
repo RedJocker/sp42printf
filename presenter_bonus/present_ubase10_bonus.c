@@ -6,7 +6,7 @@
 /*   By: maurodri <maurodri@student.42sp...>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 16:03:54 by maurodri          #+#    #+#             */
-/*   Updated: 2023/12/28 23:08:33 by maurodri         ###   ########.fr       */
+/*   Updated: 2024/01/03 05:12:49 by maurodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,10 +135,8 @@ int	present_ubase10(t_format *format, va_list *lst)
 
 	out_str_len = 0;
 	n = va_arg (*lst, long long);
-	if (n < 0)
-		num = 0;
-	else
-		num = (unsigned long long) n;
+
+	num = (unsigned long long) n;
 	out_str_len = present_ubase10_num(num, format, &out_str);
 	if (!out_str)
 		return (-1);
