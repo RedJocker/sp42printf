@@ -6,7 +6,7 @@
 #    By: maurodri <maurodri@student.42sp...>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/28 21:13:25 by maurodri          #+#    #+#              #
-#    Updated: 2024/01/03 05:06:50 by maurodri         ###   ########.fr        #
+#    Updated: 2024/01/03 18:13:42 by maurodri         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -61,51 +61,57 @@ BONUS_HEADERS := ft_printf_bonus.h \
 				 presenter_bonus/presenter_utils_bonus.h
 
 VPATH = ./parser/ ./presenter/ ./parser_bonus/ ./presenter_bonus/
-DEP_FILES = $(patsubst %.c,%.d,$(FILES))
 
-MANDATORY_OBJS = $(patsubst %.c,%.o,$(FILES))
-BONUS_DEP_FILES = $(patsubst %.c,%.d,$(BONUS_FILES))
-BONUS_OBJS = $(patsubst %.c,%.o,$(BONUS_FILES))
-DEP_FLAGS =  -MP -MD
-CFLAGS = -g -Wall -Wextra -Werror
-CC = cc
+MANDATORY_OBJS := $(patsubst %.c,%.o,$(FILES))
+BONUS_OBJS := $(patsubst %.c,%.o,$(BONUS_FILES))
+
+DEP_FLAGS := -MP -MD -MF
+CFLAGS := -g -Wall -Wextra -Werror
+CC := cc
 
 ifndef WITH_BONUS
-	CLEAR = $(BONUS_OBJS)
-	OBJS = $(MANDATORY_OBJS)
+	CLEAR := $(BONUS_OBJS)
+	OBJS := $(MANDATORY_OBJS)
 endif
 
 ifdef WITH_BONUS
-	CLEAR = $(MANDATORY_OBJS)
-	OBJS = $(BONUS_OBJS)
+	CLEAR := $(MANDATORY_OBJS)
+	OBJS := $(BONUS_OBJS)
 endif
+
+DEP_DIR := ./dir/
+DEP_FILES := $(addprefix $(DEP_DIR), $(addsuffix .d,$(OBJS)))
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	@rm -f $(NAME) $(CLEAR)
-	@ar rcs $(NAME) $^
-	@etags $(wildcard *_bonus.c) $(wildcard */*_bonus.c) $(wildcard *_bonus.h) $(wildcard */*_bonus.h) 
+	rm -f $(NAME) $(CLEAR)
+	ar rcs $(NAME) $^
+	etags $(wildcard *_bonus.c) $(wildcard */*_bonus.c) $(wildcard *_bonus.h) $(wildcard */*_bonus.h) 
 
-$(OBJS): %.o : %.c
-	@$(CC) $(CFLAGS) -c $< -o $@ $(DEP_FLAGS)
+$(OBJS): %.o : %.c | $(DEP_DIR)
+	$(CC) $(CFLAGS) -c $< -o $@ $(DEP_FLAGS) "$(DEP_DIR)$@.d"
+
+$(DEP_DIR):
+	mkdir $@  
 
 bonus:
-	@$(MAKE) WITH_BONUS=1
+	$(MAKE) WITH_BONUS=1
 
 .Phony: all clean fclean re 
 
 test: $(NAME)
-	@$(CC) $(CFLAGS) -g main.c $<
-	@./a.out
+	$(CC) $(CFLAGS) -g main.c $<
+	./a.out
 
 clean:
-	@rm -fr $(OBJS) $(DEP_FILES) \
-			$(BONUS_OBJS) $(BONUS_DEP_FILES) \
-			*~
+	rm -fr $(OBJS) \
+			$(BONUS_OBJS) \
+			$(DEP_DIR) \
+			*~ **/*~ **/\#*\#
 
 fclean: clean
-	@rm -f $(NAME) TAGS ./a.out
+	rm -f $(NAME) TAGS ./a.out
 
 re: fclean all
 
