@@ -6,7 +6,7 @@
 /*   By: maurodri <maurodri@student.42sp...>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 16:03:50 by maurodri          #+#    #+#             */
-/*   Updated: 2023/12/13 21:55:59 by maurodri         ###   ########.fr       */
+/*   Updated: 2024/01/03 06:27:33 by maurodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,7 @@ int		hex_num_size(unsigned long long nbr, int precision);
 int		pfmt_size_outstr(int xlen, t_format *fmt);
 void	*ft_memcpy(void *dst, const void *src, size_t n);
 void	fill_string(char *str, char filler, unsigned int size);
+int		ubase10_num_size(unsigned int nbr, int precision);
+int		ubase10_precision(t_format *fmt);
 
 #endif

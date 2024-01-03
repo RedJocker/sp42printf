@@ -6,43 +6,12 @@
 /*   By: maurodri <maurodri@student.42sp...>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 16:03:54 by maurodri          #+#    #+#             */
-/*   Updated: 2024/01/03 05:12:49 by maurodri         ###   ########.fr       */
+/*   Updated: 2024/01/03 06:40:41 by maurodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "presenter_utils_bonus.h"
 #include "presenter_bonus.h"
-
-static int	ubase10_num_size(unsigned int nbr, int precision)
-{
-	int	size;
-
-	size = 0;
-	if (nbr == 0 && precision > -1)
-		size = 1;
-	else
-		while (nbr != 0)
-			nbr /= 10 + (0 * size++);
-	if (precision > size)
-		return (precision);
-	else
-		return (size);
-}
-
-
-static int	ubase10_precision(t_format *fmt)
-{
-	int	precision;
-
-	if (has_flags(fmt, 1, ZERO_PAD)
-		&& !has_flags(fmt, 1, LEFT_JUSTIFY)
-		&& fmt->precision == 0
-		&& fmt->width > 0)
-		precision = fmt->width;
-	else
-		precision = fmt->precision;
-	return (precision);
-}
 
 static int	fill_ubase10_num(
 	char *num_str, unsigned int n, int size)
@@ -76,7 +45,7 @@ static char	*ubase10_str(unsigned int n, t_format *fmt)
 	i = 0;
 	num_str[size] = '\0';
 	if (n == 0 && precision == 0)
-		num_str[0] = '0'; 
+		num_str[0] = '0';
 	else
 		i = fill_ubase10_num(num_str, n, size);
 	while (size - 1 - i >= 0)
@@ -93,7 +62,7 @@ static int	ubase10_size_outstr(int len, t_format *fmt)
 		outstr_len = fmt->width;
 	else
 	{
-			outstr_len = len;
+		outstr_len = len;
 	}
 	return (outstr_len);
 }
@@ -135,7 +104,6 @@ int	present_ubase10(t_format *format, va_list *lst)
 
 	out_str_len = 0;
 	n = va_arg (*lst, long long);
-
 	num = (unsigned long long) n;
 	out_str_len = present_ubase10_num(num, format, &out_str);
 	if (!out_str)

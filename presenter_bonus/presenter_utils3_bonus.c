@@ -6,7 +6,7 @@
 /*   By: maurodri <maurodri@student.42sp...>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 18:58:47 by maurodri          #+#    #+#             */
-/*   Updated: 2023/12/13 20:58:23 by maurodri         ###   ########.fr       */
+/*   Updated: 2024/01/03 06:39:13 by maurodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,4 +52,34 @@ void	fill_string(char *str, char filler, unsigned int size)
 	i = 0;
 	while (i < size)
 		str[i++] = filler;
+}
+
+int	ubase10_num_size(unsigned int nbr, int precision)
+{
+	int	size;
+
+	size = 0;
+	if (nbr == 0 && precision > -1)
+		size = 1;
+	else
+		while (nbr != 0)
+			nbr /= 10 + (0 * size++);
+	if (precision > size)
+		return (precision);
+	else
+		return (size);
+}
+
+int	ubase10_precision(t_format *fmt)
+{
+	int	precision;
+
+	if (has_flags(fmt, 1, ZERO_PAD)
+		&& !has_flags(fmt, 1, LEFT_JUSTIFY)
+		&& fmt->precision == 0
+		&& fmt->width > 0)
+		precision = fmt->width;
+	else
+		precision = fmt->precision;
+	return (precision);
 }
