@@ -6,17 +6,17 @@
 /*   By: maurodri <maurodri@student.42sp...>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 16:03:53 by maurodri          #+#    #+#             */
-/*   Updated: 2024/01/03 21:57:15 by maurodri         ###   ########.fr       */
+/*   Updated: 2024/01/04 19:58:18 by maurodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "presenter_utils_bonus.h"
 #include "presenter_bonus.h"
 
-
-static int	string_num_size(char *str, int precision)
+static int	string_precision_size(char *str, int precision)
 {
 	int	size;
+
 	if (!str && precision < 6 && precision != 0)
 		return (0);
 	else if (!str && (precision >= 6 || precision == 0))
@@ -24,69 +24,35 @@ static int	string_num_size(char *str, int precision)
 	if (precision == -1)
 		return (0);
 	size = ft_strlen(str);
-	if (precision > size)
-		return (size);
-	else if (precision > 0)
+	if (precision > 0 && precision < size)
 		return (precision);
 	else
 		return (size);
 }
 
-static int	string_precision(t_format *fmt)
-{
-	int	precision;
-
-	if (has_flags(fmt, 1, ZERO_PAD)
-		&& !has_flags(fmt, 1, LEFT_JUSTIFY)
-		&& fmt->precision == 0
-		&& fmt->width > 0)
-		precision = fmt->width;
-	else
-		precision = fmt->precision;
-	return (precision);
-}
-
-static int	fill_precision_str(char *dst, char *src, int size)
-{
-	if(!src)
-		ft_memcpy(dst, "(null)", size);
-	else
-		ft_memcpy(dst, src, size);
-	return (size);
-}
-
 static char	*precision_string(char *str, t_format *fmt)
 {
-	int		i;
-	int		size;
+	int		precision_str_size;
 	char	*precision_str;
-	int		precision;
 
-	precision = string_precision(fmt);
-	size = string_num_size(str, precision);
-	precision_str = malloc((size + 1) * sizeof(char));
+	precision_str_size = string_precision_size(str, fmt->precision);
+	precision_str = malloc((precision_str_size + 1) * sizeof(char));
 	if (!precision_str)
 		return ((char *) 0);
-	i = 0;
-	precision_str[size] = '\0';
-	i = fill_precision_str(precision_str, str, size);
-	while (size - 1 - i >= 0)
-		precision_str[size - 1 - i++] = '0';
+	precision_str[precision_str_size] = '\0';
+	if (!str)
+		ft_memcpy(precision_str, "(null)", precision_str_size);
+	else
+		ft_memcpy(precision_str, str, precision_str_size);
 	return (precision_str);
 }
 
 static int	outstr_size(int len, t_format *fmt)
 {
-	int	outstr_len;
-
-	outstr_len = 0;
 	if (fmt->width > len)
-		outstr_len = fmt->width;
+		return (fmt->width);
 	else
-	{
-		outstr_len = len;
-	}
-	return (outstr_len);
+		return (len);
 }
 
 static int	present_string_fmt(
@@ -119,7 +85,6 @@ static int	present_string_fmt(
 
 int	present_string(t_format *format, va_list *lst)
 {
-
 	char	*str;
 	char	*out_str;
 	int		out_str_len;
