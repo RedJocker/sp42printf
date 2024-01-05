@@ -6,7 +6,7 @@
 /*   By: maurodri <maurodri@student.42sp...>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 18:42:55 by maurodri          #+#    #+#             */
-/*   Updated: 2023/12/28 21:57:39 by maurodri         ###   ########.fr       */
+/*   Updated: 2024/01/05 20:18:01 by maurodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,12 +51,34 @@
 //#define ARGS "==%-12u==", LONG_MIN
 //#define ARGS "==%-13u==", UINT_MAX
 //#define ARGS "==%-13u==", UINT_MAX
-#define ARGS "==%-15u==", 9223372036854775807LL
+//#define ARGS "==%-15u==", 9223372036854775807LL
+//#define ARGS "==%-02d==", -1
+//#define ARGS "==%-011d==", -1
+//#define ARGS "==%-02d==", -1
+//#define ARGS "==%+01d==", 111
+//#define ARGS "==%+0.1d==", 1
+//#define ARGS "==%+01d==", 11
+//#define ARGS "==%+0.1d==", 11
+//#define ARGS "==%+02d==", 1
+//#define ARGS "==%-+10.5d==", 11
+//#define ARGS "==%-11d==", LONG_MAX
+//#define ARGS "==%-14d==", ULONG_MAX
+//#define ARGS "==%04d==", 9
+#define ARGS "==% d==", 0
 
-//117: 	TEST(87, print(" %-1u ", 0));
-//141: 	TEST(111, print(" %-12u ", LONG_MIN));
-//144: 	TEST(114, print(" %-15u ", 9223372036854775807LL));
-//145: 	TEST(115, print(" %-9u %-10u %-11u %-12u %-13u %-14u %-15u", INT_MAX, INT_MIN, LONG_MAX, LONG_MIN, ULONG_MAX, 0, -42));
+/* 35: 	TEST(10, print(" % d ", 0)); */
+/* 37: 	TEST(12, print(" % d ", 1)); */
+/* 38: 	TEST(13, print(" % d ", 9)); */
+/* 39: 	TEST(14, print(" % d ", 10)); */
+/* 40: 	TEST(15, print(" % d ", 11)); */
+/* 41: 	TEST(16, print(" % d ", 15)); */
+/* 42: 	TEST(17, print(" % d ", 16)); */
+/* 43: 	TEST(18, print(" % d ", 17)); */
+/* 44: 	TEST(19, print(" % d ", 99)); */
+/* 45: 	TEST(20, print(" % d ", 100)); */
+/* 46: 	TEST(21, print(" % d ", 101)); */
+/* 56: 	TEST(31, print(" % d ", INT_MAX)); */
+/* 59: 	TEST(34, print(" % d ", LONG_MIN)); */
 
 int	main(void)
 {
