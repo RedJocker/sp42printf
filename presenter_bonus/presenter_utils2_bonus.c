@@ -6,12 +6,11 @@
 /*   By: maurodri <maurodri@student.42sp...>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 16:04:23 by maurodri          #+#    #+#             */
-/*   Updated: 2023/12/13 20:57:38 by maurodri         ###   ########.fr       */
+/*   Updated: 2024/01/06 23:51:10 by maurodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "presenter_utils_bonus.h"
-#include <stdlib.h>
 
 int	ft_putnbr_hex(unsigned long long nbr, char *hexbase)
 {
@@ -54,11 +53,16 @@ static int	hex_num_string_precision(t_format *fmt)
 {
 	int	precision;
 
+
 	if (has_flags(fmt, 1, ZERO_PAD)
-		&& !has_flags(fmt, 1, LEFT_JUSTIFY) && fmt->precision == -1)
+		&& !has_flags(fmt, 1, LEFT_JUSTIFY) && fmt->precision == 0)
+	{
 		precision = fmt->width - 2;
+	}
 	else
+	{
 		precision = fmt->precision;
+	}
 	return (precision);
 }
 
@@ -88,7 +92,6 @@ char	*hex_num_string(unsigned long long n, char *xbase, t_format *fmt)
 	num_str = malloc((size + 1) * sizeof(char));
 	if (!num_str)
 		return ((char *) 0);
-	fill_string(num_str, ' ', size);
 	i = 0;
 	num_str[size] = '\0';
 	if (n == 0)

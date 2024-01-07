@@ -6,7 +6,7 @@
 /*   By: maurodri <maurodri@student.42sp...>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 18:42:55 by maurodri          #+#    #+#             */
-/*   Updated: 2024/01/05 20:18:01 by maurodri         ###   ########.fr       */
+/*   Updated: 2024/01/07 01:34:20 by maurodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 //#define ARGS "==%010c==\n", 'x'
 //#define ARGS " %-11p %-12p ", INT_MIN, INT_MAX
 //#define ARGS "==%10p==", &ret
+//#define ARGS "==%010p==", 4236338
 //#define ARGS "==%10p==", (void *) 1300874
 //#define ARGS "==%-10p==", (void *) 1399990
 //#define ARGS "==%20.10p==", (void *) 1399990
@@ -52,6 +53,7 @@
 //#define ARGS "==%-13u==", UINT_MAX
 //#define ARGS "==%-13u==", UINT_MAX
 //#define ARGS "==%-15u==", 9223372036854775807LL
+//#define ARGS "==%-.d==", 0
 //#define ARGS "==%-02d==", -1
 //#define ARGS "==%-011d==", -1
 //#define ARGS "==%-02d==", -1
@@ -64,21 +66,11 @@
 //#define ARGS "==%-11d==", LONG_MAX
 //#define ARGS "==%-14d==", ULONG_MAX
 //#define ARGS "==%04d==", 9
-#define ARGS "==% d==", 0
-
-/* 35: 	TEST(10, print(" % d ", 0)); */
-/* 37: 	TEST(12, print(" % d ", 1)); */
-/* 38: 	TEST(13, print(" % d ", 9)); */
-/* 39: 	TEST(14, print(" % d ", 10)); */
-/* 40: 	TEST(15, print(" % d ", 11)); */
-/* 41: 	TEST(16, print(" % d ", 15)); */
-/* 42: 	TEST(17, print(" % d ", 16)); */
-/* 43: 	TEST(18, print(" % d ", 17)); */
-/* 44: 	TEST(19, print(" % d ", 99)); */
-/* 45: 	TEST(20, print(" % d ", 100)); */
-/* 46: 	TEST(21, print(" % d ", 101)); */
-/* 56: 	TEST(31, print(" % d ", INT_MAX)); */
-/* 59: 	TEST(34, print(" % d ", LONG_MIN)); */
+//#define ARGS "==% d==", 0
+//#define ARGS "==%+.d==", 0
+//#define ARGS "==% .5d==", 0
+//#define ARGS "==% .5d==", -1
+#define ARGS "==% 10.d==", 0
 
 int	main(void)
 {

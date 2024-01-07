@@ -6,7 +6,7 @@
 /*   By: maurodri <maurodri@student.42sp...>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 16:03:12 by maurodri          #+#    #+#             */
-/*   Updated: 2024/01/05 20:16:40 by maurodri         ###   ########.fr       */
+/*   Updated: 2024/01/07 01:31:27 by maurodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 static int	base10_num_size(int nbr)
 {
   	int	size;
+	
+	size = 0;
 	if (nbr == 0)
 		return (1);
 	while (nbr != 0)
@@ -28,35 +30,29 @@ static int base10_precision(t_format *fmt, int num_size, int num)
 {
 	int	precision;
 	int is_signed;
+	int is_padded;
 
 	precision = 0;
-	is_signed = (has_flags(fmt, 1, SIGNED) || num < 0); 
+	is_signed = (has_flags(fmt, 1, SIGNED) || num < 0);
+	is_padded = has_flags(fmt, 1, ZERO_PAD);
 	if (fmt->precision == 0
 		&& fmt->width > 0
 		&& !has_flags(fmt, 1, LEFT_JUSTIFY))
-		{
-			printf("A");
-			precision = fmt->width;
-		}
+	{
+		precision = num_size * (!is_padded) + fmt->width * is_padded;
+	}
 	else
 	{
-		if (is_signed)
-		{
-			printf("C");
-			precision = fmt->precision + 1;
-		}
-		else
-		{
-			printf("D");
-			precision = fmt->precision;
-        }
+		precision = fmt->precision + (is_signed || has_flags(fmt, 1, SPACE));
 	}
-	if (num_size >= precision)
+	if (num == 0 && fmt->precision == -1)
+		return (is_signed);
+	else if (num_size >= precision)
 	{
-		printf("Precision: %d\n", num_size + (is_signed || has_flags(fmt, 1, SPACE)));
+		//printf("Precision: %d\n", num_size + (is_signed || has_flags(fmt, 1, SPACE)));
 		return (num_size + (is_signed || has_flags(fmt, 1, SPACE))); 
 	}
-	printf("precision: %d\n", precision);
+	//printf("precision: %d\n", precision);
 	return (precision);
 }
 
@@ -90,11 +86,13 @@ static char	*base10_str(int n, t_format *fmt)
 	num_size = base10_num_size(n);
 	size = base10_precision(fmt, num_size, n);
 	//printf("preecision %d\n", has_flags());
-	
 	num_str = malloc((size + 1) * sizeof(char));
 	if (!num_str)
 		return ((char *) 0);
-	fill_string(num_str, '0', size);
+	if (has_flags(fmt, 1, ZERO_PAD) || fmt->precision != -1)
+		fill_string(num_str, '0', size);
+	else
+		fill_string(num_str, ' ', size);
 	num_str[size] = '\0';
 	if (n == 0 && fmt->precision == 0)
 		num_str[0] = '0';
@@ -104,8 +102,8 @@ static char	*base10_str(int n, t_format *fmt)
 		num_str[0] = '-';
 	else if (has_flags(fmt, 1, SIGNED))
 		num_str[0] = '+';
-	else if (has_flags(fmt, 1, SPACE))
-		num_str[0] = ' ';	 
+	else if (has_flags(fmt, 1, SPACE) && !(fmt->precision == size))
+		num_str[0] = ' ';
 	return (num_str);
 }
 
