@@ -6,7 +6,7 @@
 /*   By: maurodri <maurodri@student.42sp...>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 16:04:23 by maurodri          #+#    #+#             */
-/*   Updated: 2024/01/06 23:51:10 by maurodri         ###   ########.fr       */
+/*   Updated: 2024/01/07 03:47:06 by maurodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ int	hex_num_size(unsigned long long nbr, int precision)
 static int	hex_num_string_precision(t_format *fmt)
 {
 	int	precision;
-
 
 	if (has_flags(fmt, 1, ZERO_PAD)
 		&& !has_flags(fmt, 1, LEFT_JUSTIFY) && fmt->precision == 0)

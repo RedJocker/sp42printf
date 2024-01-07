@@ -6,7 +6,7 @@
 /*   By: maurodri <maurodri@student.42sp...>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 16:03:12 by maurodri          #+#    #+#             */
-/*   Updated: 2024/01/07 01:31:27 by maurodri         ###   ########.fr       */
+/*   Updated: 2024/01/07 03:50:40 by maurodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,11 @@
 #include "presenter_bonus.h"
 #include <stdio.h>
 
-static int	base10_num_size(int nbr)
-{
-  	int	size;
-	
-	size = 0;
-	if (nbr == 0)
-		return (1);
-	while (nbr != 0)
-		nbr /= 10 + (0 * size++);
-	return (size);
-}
-
-static int base10_precision(t_format *fmt, int num_size, int num)
+static int	base10_precision(t_format *fmt, int num_size, int num)
 {
 	int	precision;
-	int is_signed;
-	int is_padded;
+	int	is_signed;
+	int	is_padded;
 
 	precision = 0;
 	is_signed = (has_flags(fmt, 1, SIGNED) || num < 0);
@@ -38,21 +26,13 @@ static int base10_precision(t_format *fmt, int num_size, int num)
 	if (fmt->precision == 0
 		&& fmt->width > 0
 		&& !has_flags(fmt, 1, LEFT_JUSTIFY))
-	{
 		precision = num_size * (!is_padded) + fmt->width * is_padded;
-	}
 	else
-	{
 		precision = fmt->precision + (is_signed || has_flags(fmt, 1, SPACE));
-	}
 	if (num == 0 && fmt->precision == -1)
 		return (is_signed);
 	else if (num_size >= precision)
-	{
-		//printf("Precision: %d\n", num_size + (is_signed || has_flags(fmt, 1, SPACE)));
-		return (num_size + (is_signed || has_flags(fmt, 1, SPACE))); 
-	}
-	//printf("precision: %d\n", precision);
+		return (num_size + (is_signed || has_flags(fmt, 1, SPACE)));
 	return (precision);
 }
 
@@ -85,7 +65,6 @@ static char	*base10_str(int n, t_format *fmt)
 
 	num_size = base10_num_size(n);
 	size = base10_precision(fmt, num_size, n);
-	//printf("preecision %d\n", has_flags());
 	num_str = malloc((size + 1) * sizeof(char));
 	if (!num_str)
 		return ((char *) 0);
@@ -107,18 +86,6 @@ static char	*base10_str(int n, t_format *fmt)
 	return (num_str);
 }
 
-static int	base10_size_outstr(int len, t_format *fmt)
-{
-	int	outstr_len;
-
-	outstr_len = 0;
-	if (fmt->width > len)
-		outstr_len = fmt->width;
-	else
-		outstr_len = len;
-	return (outstr_len);
-}
-
 static int	present_base10_num(
 	int num, t_format *fmt, char **outstr_ptr)
 {
@@ -131,7 +98,8 @@ static int	present_base10_num(
 	if (!numstr)
 		return (-1);
 	numstr_len = ft_strlen(numstr);
-	outstr_len = base10_size_outstr(numstr_len, fmt);
+	outstr_len = fmt->width * (fmt->width > numstr_len)
+		+ numstr_len * (fmt->width <= numstr_len);
 	*outstr_ptr = malloc(outstr_len * sizeof(char));
 	if (!(*outstr_ptr))
 		return (-1);

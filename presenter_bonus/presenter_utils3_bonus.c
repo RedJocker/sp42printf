@@ -6,14 +6,14 @@
 /*   By: maurodri <maurodri@student.42sp...>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 18:58:47 by maurodri          #+#    #+#             */
-/*   Updated: 2024/01/03 06:39:13 by maurodri         ###   ########.fr       */
+/*   Updated: 2024/01/07 03:45:01 by maurodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "presenter_utils_bonus.h"
 #include "presenter_bonus.h"
 
-int	pfmt_size_outstr(int xlen, t_format *fmt)
+int	pointer_size_outstr(int xlen, t_format *fmt)
 {
 	int	outstr_len;
 

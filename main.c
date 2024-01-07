@@ -6,7 +6,7 @@
 /*   By: maurodri <maurodri@student.42sp...>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 18:42:55 by maurodri          #+#    #+#             */
-/*   Updated: 2024/01/07 01:34:20 by maurodri         ###   ########.fr       */
+/*   Updated: 2024/01/07 04:01:31 by maurodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,26 @@
 //#define ARGS "==%+.d==", 0
 //#define ARGS "==% .5d==", 0
 //#define ARGS "==% .5d==", -1
-#define ARGS "==% 10.d==", 0
+//#define ARGS "==% 10.d==", 0
+//#define ARGS "==%-.x==", 0
+//#define ARGS "==%-02x==", -1
+//#define ARGS "==%-02x==", 1
+//#define ARGS "==%-011x==", -1
+//#define ARGS "==%-02.x==", -1
+//#define ARGS "==%+01x==", 111
+//#define ARGS "==%# .10x==", 1000
+//#define ARGS "==%010x==", 11
+//#define ARGS "==% x==", 11
+//#define ARGS "==%+02x==", 1
+//#define ARGS "==%-+10.5x==", 11
+//#define ARGS "==%-11x==", LONG_MAX
+//#define ARGS "==%-14x==", ULONG_MAX
+//#define ARGS "==%04x==", 9
+//#define ARGS "==% .5x==", 10
+//#define ARGS "==% x==", 0
+//#define ARGS "==%+.x==", 0
+//#define ARGS "==% .5x==", -10
+#define ARGS "==% 10.x==", 0
 
 int	main(void)
 {

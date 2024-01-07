@@ -6,7 +6,7 @@
 /*   By: maurodri <maurodri@student.42sp...>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 16:03:52 by maurodri          #+#    #+#             */
-/*   Updated: 2023/12/13 21:56:19 by maurodri         ###   ########.fr       */
+/*   Updated: 2024/01/07 03:46:19 by maurodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static int	present_pointer_num(
 	if (!numstr)
 		return (-1);
 	numstr_len = ft_strlen(numstr);
-	outstr_len = pfmt_size_outstr(numstr_len + 2, fmt);
+	outstr_len = pointer_size_outstr(numstr_len + 2, fmt);
 	*outstr_ptr = malloc(outstr_len * sizeof(char));
 	if (!(*outstr_ptr))
 		return (-1);
