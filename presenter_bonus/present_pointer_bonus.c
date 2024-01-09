@@ -6,7 +6,7 @@
 /*   By: maurodri <maurodri@student.42sp...>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 16:03:52 by maurodri          #+#    #+#             */
-/*   Updated: 2024/01/07 03:46:19 by maurodri         ###   ########.fr       */
+/*   Updated: 2024/01/08 19:19:14 by maurodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static int	present_pointer_num(
 	int		outstr_len;
 	char	*ptr;
 
-	numstr = hex_num_string(num, XBASEL, fmt);
+	numstr = pointer_hex_num_string(num, XBASEL, fmt);
 	if (!numstr)
 		return (-1);
 	numstr_len = ft_strlen(numstr);
