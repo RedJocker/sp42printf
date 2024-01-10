@@ -6,7 +6,7 @@
 #    By: maurodri <maurodri@student.42sp...>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/28 21:13:25 by maurodri          #+#    #+#              #
-#    Updated: 2024/01/09 19:55:01 by maurodri         ###   ########.fr        #
+#    Updated: 2024/01/10 20:12:41 by maurodri         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -65,7 +65,7 @@ MANDATORY_OBJS := $(patsubst %.c,%.o,$(FILES))
 BONUS_OBJS := $(patsubst %.c,%.o,$(BONUS_FILES))
 
 DEP_FLAGS := -MP -MD -MF
-CFLAGS := -g -Wall -Wextra -Werror
+CFLAGS := -Wall -Wextra -Werror
 CC := cc
 
 ifndef WITH_BONUS
@@ -84,33 +84,27 @@ DEP_FILES := $(addprefix $(DEP_DIR), $(addsuffix .d,$(OBJS)))
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	rm -f $(NAME) $(CLEAR)
-	ar rcs $(NAME) $^
-	etags $(wildcard *_bonus.c) $(wildcard */*_bonus.c) $(wildcard *_bonus.h) $(wildcard */*_bonus.h) 
+	@rm -f $(NAME) $(CLEAR)
+	@ar rcs $(NAME) $^
 
 $(OBJS): %.o : %.c | $(DEP_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@ $(DEP_FLAGS) "$(DEP_DIR)$@.d"
 
 $(DEP_DIR):
-	mkdir $@  
+	@mkdir -p $@  
 
 bonus:
-	$(MAKE) WITH_BONUS=1
+	@$(MAKE) --no-print-directory WITH_BONUS=1
 
-.Phony: all clean fclean re 
-
-test: $(NAME)
-	$(CC) $(CFLAGS) -g main.c $<
-	./a.out
+.PHONY: all clean fclean re bonus
 
 clean:
 	rm -fr $(OBJS) \
 			$(BONUS_OBJS) \
-			$(DEP_DIR) \
-			*~ **/*~ **/\#*\#
+			$(DEP_DIR)
 
 fclean: clean
-	rm -f $(NAME) TAGS ./a.out
+	rm -f $(NAME)
 
 re: fclean all
 
