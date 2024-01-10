@@ -6,7 +6,7 @@
 /*   By: maurodri <maurodri@student.42sp...>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 18:58:47 by maurodri          #+#    #+#             */
-/*   Updated: 2024/01/07 03:45:01 by maurodri         ###   ########.fr       */
+/*   Updated: 2024/01/10 19:38:27 by maurodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,6 @@ void	*ft_memcpy(void *dst, const void *src, size_t n)
 {
 	size_t	i;
 
-	if (dst == NULL && src == NULL)
-		return (NULL);
 	i = 0;
 	while (i < n)
 	{
