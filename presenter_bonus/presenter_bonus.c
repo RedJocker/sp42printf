@@ -6,7 +6,7 @@
 /*   By: maurodri <maurodri@student.42sp...>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 16:02:30 by maurodri          #+#    #+#             */
-/*   Updated: 2023/12/13 18:47:20 by maurodri         ###   ########.fr       */
+/*   Updated: 2024/01/09 19:54:55 by maurodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ int	present_format(t_format *format, va_list *lst)
 	else if (format->conversion == ESCAPE)
 		return (present_escape(format, lst));
 	else if (format->conversion == HEXA_LOWER)
-		return (present_hexa_lower(format, lst));
+		return (present_hexa(format, lst, XBASEL));
 	else if (format->conversion == HEXA_UPPER)
-		return (present_hexa_upper(format, lst));
+		return (present_hexa(format, lst, XBASEU));
 	else if (format->conversion == POINTER)
 		return (present_pointer(format, lst));
 	return (-1);

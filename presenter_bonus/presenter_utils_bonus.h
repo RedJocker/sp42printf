@@ -6,7 +6,7 @@
 /*   By: maurodri <maurodri@student.42sp...>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 16:03:50 by maurodri          #+#    #+#             */
-/*   Updated: 2024/01/08 19:49:31 by maurodri         ###   ########.fr       */
+/*   Updated: 2024/01/09 20:40:21 by maurodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,16 @@
 # include <stdlib.h>
 # include "../ft_printf_internals_bonus.h"
 
-# define XBASEL "0123456789abcdef"
-# define XBASEU "0123456789ABCDEF"
+# define XBASEL "0123456789abcdef0x"
+# define XBASEU "0123456789ABCDEF0X"
 
 // presenter_utils_bonus.c
 size_t	ft_strlen(const char *str);
 int		base10_num_size(int nbr);
 
 // presenter_utils2_bonus.c
-int		fill_hex_num(char *num_str, unsigned long long n, int size, char *xbase);
-char	*pointer_hex_num_string(unsigned long long n, char *xbase, t_format *fmt);
-int		hex_num_size(unsigned long long nbr, int precision);
+char	*pointer_hex_num_string(
+			unsigned long long n, char *xbase, t_format *fmt);
 char	*hex_num_string(unsigned int n, char *xbase, t_format *fmt);
 
 // presenter_utils3_bonus.c

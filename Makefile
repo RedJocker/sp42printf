@@ -6,7 +6,7 @@
 #    By: maurodri <maurodri@student.42sp...>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/28 21:13:25 by maurodri          #+#    #+#              #
-#    Updated: 2024/01/03 18:13:42 by maurodri         ###   ########.fr        #
+#    Updated: 2024/01/09 19:55:01 by maurodri         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -49,8 +49,7 @@ BONUS_FILES :=  ft_printf_bonus.c \
 		present_ubase10_bonus.c \
 		present_char_bonus.c \
 		present_escape_bonus.c \
-		present_hexa_lower_bonus.c \
-		present_hexa_upper_bonus.c \
+		present_hexa_bonus.c \
 		present_pointer_bonus.c
 
 BONUS_HEADERS := ft_printf_bonus.h \

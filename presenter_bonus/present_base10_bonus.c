@@ -6,13 +6,12 @@
 /*   By: maurodri <maurodri@student.42sp...>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 16:03:12 by maurodri          #+#    #+#             */
-/*   Updated: 2024/01/07 03:50:40 by maurodri         ###   ########.fr       */
+/*   Updated: 2024/01/10 00:58:05 by maurodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "presenter_utils_bonus.h"
 #include "presenter_bonus.h"
-#include <stdio.h>
 
 static int	base10_precision(t_format *fmt, int num_size, int num)
 {

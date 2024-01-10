@@ -6,13 +6,12 @@
 /*   By: maurodri <maurodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 00:10:50 by maurodri          #+#    #+#             */
-/*   Updated: 2024/01/06 23:44:50 by maurodri         ###   ########.fr       */
+/*   Updated: 2024/01/10 00:57:35 by maurodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_INTERNALS_BONUS_H
 # define FT_PRINTF_INTERNALS_BONUS_H
-# include <stdio.h>
 
 typedef enum e_flags
 {

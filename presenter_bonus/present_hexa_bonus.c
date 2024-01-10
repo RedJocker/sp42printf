@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   present_hexa_lower_bonus.c                         :+:      :+:    :+:   */
+/*   present_hexa_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maurodri <maurodri@student.42sp...>        +#+  +:+       +#+        */
+/*   By: maurodri <maurodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/27 16:03:51 by maurodri          #+#    #+#             */
-/*   Updated: 2024/01/08 23:42:30 by maurodri         ###   ########.fr       */
+/*   Created: 2024/01/09 19:49:41 by maurodri          #+#    #+#             */
+/*   Updated: 2024/01/09 20:37:53 by maurodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "presenter_utils_bonus.h"
 #include "presenter_bonus.h"
 
-int	hexa_size_outstr(int xlen, t_format *fmt, unsigned int num)
+static int	hexa_size_outstr(int xlen, t_format *fmt, unsigned int num)
 {
 	int	outstr_len;
 	int	has_hashtag;
@@ -24,7 +24,7 @@ int	hexa_size_outstr(int xlen, t_format *fmt, unsigned int num)
 		outstr_len = fmt->width;
 	else if (has_hashtag && num == 0)
 		outstr_len = xlen;
-	else if(has_hashtag && fmt->width > xlen + 2)
+	else if (has_hashtag && fmt->width > xlen + 2)
 		outstr_len = fmt->width;
 	else if (has_hashtag)
 		outstr_len = xlen + 2;
@@ -35,38 +35,42 @@ int	hexa_size_outstr(int xlen, t_format *fmt, unsigned int num)
 	return (outstr_len);
 }
 
-int	present_hexa_num(
-	unsigned int num, t_format *fmt, char **outstr_ptr, char *base)
+static int	hexa_pad_offset(int outlen, int xlen, t_format *fmt, int n)
+{
+	if (has_flags(fmt, 1, LEFT_JUSTIFY))
+		return (0);
+	return (outlen - (xlen + 2 * (has_flags(fmt, 1, HASHTAG) && n != 0)));
+}
+
+static int	present_hexa_num(
+	unsigned int n, t_format *fmt, char **out_ptr, char *base)
 {
 	char	*numstr;
 	int		xlen;
-	int		outstr_len;
+	int		outlen;
 	char	*ptr;
 
-	numstr = hex_num_string(num, base, fmt);
+	numstr = hex_num_string(n, base, fmt);
 	if (!numstr)
 		return (-1);
 	xlen = ft_strlen(numstr);
-	outstr_len = hexa_size_outstr(xlen, fmt, num);
-	*outstr_ptr = malloc(outstr_len * sizeof(char));
-	if (!(*outstr_ptr))
+	outlen = hexa_size_outstr(xlen, fmt, n);
+	*out_ptr = malloc(outlen * sizeof(char));
+	if (!(*out_ptr))
 		return (-1);
-	fill_string(*outstr_ptr, ' ', outstr_len);
-	if (has_flags(fmt, 1, LEFT_JUSTIFY))
-		ptr = *outstr_ptr;
-	else
-		ptr = *outstr_ptr + outstr_len - (xlen + 2 * (has_flags(fmt, 1, HASHTAG) && num != 0));
-	if (has_flags(fmt, 1, HASHTAG) && num != 0)
+	fill_string(*out_ptr, ' ', outlen);
+	ptr = *out_ptr + hexa_pad_offset(outlen, xlen, fmt, n);
+	if (has_flags(fmt, 1, HASHTAG) && n != 0)
 	{
-		ft_memcpy(ptr, "0x", 2);
-		ptr +=2;
+		ft_memcpy(ptr, base + 16, 2);
+		ptr += 2;
 	}
 	ft_memcpy(ptr, numstr, xlen);
 	free(numstr);
-	return (outstr_len);
+	return (outlen);
 }
 
-int	present_hexa_lower(t_format *fmt, va_list *lst)
+int	present_hexa(t_format *fmt, va_list *lst, char *base)
 {
 	unsigned int	num;
 	char			*out_str;
@@ -74,7 +78,7 @@ int	present_hexa_lower(t_format *fmt, va_list *lst)
 
 	out_str_len = 0;
 	num = (unsigned int) va_arg(*lst, unsigned int);
-	out_str_len = present_hexa_num(num, fmt, &out_str, XBASEL);
+	out_str_len = present_hexa_num(num, fmt, &out_str, base);
 	if (!out_str)
 		return (-1);
 	write(1, out_str, out_str_len);

@@ -6,13 +6,13 @@
 /*   By: maurodri <maurodri@student.42sp...>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 16:04:23 by maurodri          #+#    #+#             */
-/*   Updated: 2024/01/08 21:31:07 by maurodri         ###   ########.fr       */
+/*   Updated: 2024/01/09 20:41:12 by maurodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "presenter_utils_bonus.h"
 
-int	hex_num_size(unsigned long long nbr, int precision)
+static int	hex_num_size(unsigned long long nbr, int precision)
 {
 	int	size;
 
@@ -28,7 +28,7 @@ int	hex_num_size(unsigned long long nbr, int precision)
 		return (size);
 }
 
-int	fill_hex_num(
+static int	fill_hex_num(
 	char *num_str, unsigned long long n, int size, char *xbase)
 {
 	int	i;
@@ -47,7 +47,7 @@ char	*hex_num_string(unsigned int n, char *xbase, t_format *fmt)
 	int		i;
 	int		size;
 	char	*num_str;
-	int	precision;
+	int		precision;
 
 	if (has_flags(fmt, 1, ZERO_PAD)
 		&& !has_flags(fmt, 1, LEFT_JUSTIFY) && fmt->precision == 0)
@@ -69,8 +69,8 @@ char	*hex_num_string(unsigned int n, char *xbase, t_format *fmt)
 	return (num_str);
 }
 
-
-char	*pointer_hex_num_string(unsigned long long n, char *xbase, t_format *fmt)
+char	*pointer_hex_num_string(
+	unsigned long long n, char *xbase, t_format *fmt)
 {
 	int		i;
 	int		size;

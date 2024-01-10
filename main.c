@@ -6,7 +6,7 @@
 /*   By: maurodri <maurodri@student.42sp...>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 18:42:55 by maurodri          #+#    #+#             */
-/*   Updated: 2024/01/09 00:00:01 by maurodri         ###   ########.fr       */
+/*   Updated: 2024/01/09 19:59:44 by maurodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@
 //#define ARGS "==% 10.x==", 0
 //#define ARGS "==%#x==", 0
 //#define ARGS "==%-#10x==", 1
+#define ARGS "==%-#10X==", 1
 
 int	main(void)
 {
