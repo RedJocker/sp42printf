@@ -6,7 +6,7 @@
 #    By: maurodri <maurodri@student.42sp...>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/28 21:13:25 by maurodri          #+#    #+#              #
-#    Updated: 2024/01/10 20:12:41 by maurodri         ###   ########.fr        #
+#    Updated: 2024/01/11 21:19:15 by maurodri         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -69,16 +69,18 @@ CFLAGS := -Wall -Wextra -Werror
 CC := cc
 
 ifndef WITH_BONUS
+	INCLUDES := -I./ -I./presenter -I./parser
 	CLEAR := $(BONUS_OBJS)
 	OBJS := $(MANDATORY_OBJS)
 endif
 
 ifdef WITH_BONUS
+	INCLUDES := -I./ -I./presenter_bonus -I./parser_bonus
 	CLEAR := $(MANDATORY_OBJS)
 	OBJS := $(BONUS_OBJS)
 endif
 
-DEP_DIR := ./dir/
+DEP_DIR := ./dep/
 DEP_FILES := $(addprefix $(DEP_DIR), $(addsuffix .d,$(OBJS)))
 
 all: $(NAME)
@@ -88,7 +90,7 @@ $(NAME): $(OBJS)
 	@ar rcs $(NAME) $^
 
 $(OBJS): %.o : %.c | $(DEP_DIR)
-	$(CC) $(CFLAGS) -c $< -o $@ $(DEP_FLAGS) "$(DEP_DIR)$@.d"
+	$(CC) $(CFLAGS) -c $< -o $@ $(INCLUDES) $(DEP_FLAGS) "$(DEP_DIR)$@.d"
 
 $(DEP_DIR):
 	@mkdir -p $@  

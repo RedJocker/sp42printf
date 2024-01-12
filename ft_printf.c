@@ -6,12 +6,12 @@
 /*   By: maurodri <maurodri@student.42sp...>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 21:15:46 by maurodri          #+#    #+#             */
-/*   Updated: 2023/11/08 23:59:17 by maurodri         ###   ########.fr       */
+/*   Updated: 2024/01/11 21:03:32 by maurodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include "parser/parser.h"
+#include "parser.h"
 
 int	ft_printf(const char *str, ...)
 {

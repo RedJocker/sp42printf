@@ -6,7 +6,7 @@
 /*   By: maurodri <maurodri@student.42sp...>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 16:03:50 by maurodri          #+#    #+#             */
-/*   Updated: 2024/01/09 20:40:21 by maurodri         ###   ########.fr       */
+/*   Updated: 2024/01/11 21:03:30 by maurodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include <unistd.h>
 # include <stdlib.h>
-# include "../ft_printf_internals_bonus.h"
+# include "ft_printf_internals_bonus.h"
 
 # define XBASEL "0123456789abcdef0x"
 # define XBASEU "0123456789ABCDEF0X"

@@ -6,7 +6,7 @@
 /*   By: maurodri <maurodri@student.42sp...>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 16:10:15 by maurodri          #+#    #+#             */
-/*   Updated: 2023/11/27 16:16:12 by maurodri         ###   ########.fr       */
+/*   Updated: 2024/01/11 21:03:31 by maurodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include <stdarg.h>
 # include <unistd.h>
-# include "../ft_printf_internals_bonus.h"
+# include "ft_printf_internals_bonus.h"
 
 // parser.c
 int	parse_format(char **str_ptr, va_list *lst);
