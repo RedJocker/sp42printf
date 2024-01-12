@@ -6,7 +6,7 @@
 #    By: maurodri <maurodri@student.42sp...>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/28 21:13:25 by maurodri          #+#    #+#              #
-#    Updated: 2024/01/11 21:19:15 by maurodri         ###   ########.fr        #
+#    Updated: 2024/01/12 19:53:45 by maurodri         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -68,16 +68,14 @@ DEP_FLAGS := -MP -MD -MF
 CFLAGS := -Wall -Wextra -Werror
 CC := cc
 
-ifndef WITH_BONUS
-	INCLUDES := -I./ -I./presenter -I./parser
-	CLEAR := $(BONUS_OBJS)
-	OBJS := $(MANDATORY_OBJS)
-endif
-
 ifdef WITH_BONUS
 	INCLUDES := -I./ -I./presenter_bonus -I./parser_bonus
 	CLEAR := $(MANDATORY_OBJS)
 	OBJS := $(BONUS_OBJS)
+else
+	INCLUDES := -I./ -I./presenter -I./parser
+	CLEAR := $(BONUS_OBJS)
+	OBJS := $(MANDATORY_OBJS)
 endif
 
 DEP_DIR := ./dep/
