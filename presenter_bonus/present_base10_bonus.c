@@ -6,7 +6,7 @@
 /*   By: maurodri <maurodri@student.42sp...>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 16:03:12 by maurodri          #+#    #+#             */
-/*   Updated: 2024/01/10 00:58:05 by maurodri         ###   ########.fr       */
+/*   Updated: 2024/01/18 01:01:15 by maurodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static int	base10_precision(t_format *fmt, int num_size, int num)
 	else
 		precision = fmt->precision + (is_signed || has_flags(fmt, 1, SPACE));
 	if (num == 0 && fmt->precision == -1)
-		return (is_signed);
+		return (is_signed || has_flags(fmt, 1, SPACE));
 	else if (num_size >= precision)
 		return (num_size + (is_signed || has_flags(fmt, 1, SPACE)));
 	return (precision);
@@ -71,7 +71,6 @@ static char	*base10_str(int n, t_format *fmt)
 		fill_string(num_str, '0', size);
 	else
 		fill_string(num_str, ' ', size);
-	num_str[size] = '\0';
 	if (n == 0 && fmt->precision == 0)
 		num_str[0] = '0';
 	else
@@ -82,6 +81,7 @@ static char	*base10_str(int n, t_format *fmt)
 		num_str[0] = '+';
 	else if (has_flags(fmt, 1, SPACE) && !(fmt->precision == size))
 		num_str[0] = ' ';
+	num_str[size] = '\0';
 	return (num_str);
 }
 
