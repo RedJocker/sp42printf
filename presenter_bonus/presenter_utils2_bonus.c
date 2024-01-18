@@ -6,7 +6,7 @@
 /*   By: maurodri <maurodri@student.42sp...>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 16:04:23 by maurodri          #+#    #+#             */
-/*   Updated: 2024/01/09 20:41:12 by maurodri         ###   ########.fr       */
+/*   Updated: 2024/01/18 09:42:01 by maurodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,20 +52,21 @@ char	*hex_num_string(unsigned int n, char *xbase, t_format *fmt)
 	if (has_flags(fmt, 1, ZERO_PAD)
 		&& !has_flags(fmt, 1, LEFT_JUSTIFY) && fmt->precision == 0)
 	{
-		precision = fmt->width;
+		if (has_flags(fmt, 2, ZERO_PAD, HASHTAG) && n != 0)
+			precision = fmt->width - 2;
+		else
+			precision = fmt->width;
 	}
 	else
-	{
 		precision = fmt->precision;
-	}
 	size = hex_num_size(n, precision) * !(fmt->precision == -1 && n == 0);
 	num_str = malloc((size + 1) * sizeof(char));
 	if (!num_str)
 		return ((char *) 0);
-	num_str[size] = '\0';
 	i = fill_hex_num(num_str, n, size, xbase);
 	while (size - 1 - i >= 0)
 		num_str[size - 1 - i++] = '0';
+	num_str[size] = '\0';
 	return (num_str);
 }
 
